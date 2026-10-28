@@ -134,7 +134,7 @@ const MEMBERS = [
       "Gold Price ML Predictor — Yahoo Finance + FastAPI"
     ],
     skills: ["Python", "FastAPI", "Flask", "PostgreSQL", "PyTorch", "Docker", "Scikit-learn", "SQL"],
-    entry: "./portfolio_thien/portfolio.html",
+    entry: "./portfolio_thien/index.html",
     github: "https://github.com/dinhthanhthien10-bit",
     glow: "glow-backend",
     catLabel: "Python Backend & AI"
