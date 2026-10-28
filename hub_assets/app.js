@@ -1,745 +1,680 @@
-/**
- * PORTFOLIO NHÓM 1 — APPLICATION LOGIC & VIEW ENGINE
- * Team 1 - Computer Science & Design Specialists
+﻿/**
+ * ============================================================
+ * PORTFOLIO NHÓM 1 — HUB APPLICATION ENGINE
+ * Senior Frontend Developer & UI/UX Designer
+ * Features:
+ *  - Real-time search by Name, Role, Skills, Bio, Highlights
+ *  - Category filter tabs with dynamic count badges
+ *  - Interactive skill pill tags (click any tag to filter)
+ *  - Responsive Card Grid (1 col Mobile, 2-3 col Tablet/Desktop)
+ *  - Grid View & List View toggle
+ *  - Multi-criteria sorting (Default, Name A-Z, Role, Status)
+ *  - View Engine Modal with isolated iframe
+ *  - Responsive Device Frame Switcher (Desktop / Tablet / Mobile)
+ *  - Dynamic Hash Routing (#portfolio/:memberId) & History API
+ *  - Light / Dark Mode toggle with localStorage persistence
+ *  - Complete A11y & Keyboard Shortcuts (Esc, Arrow keys, 1/2/3, /)
+ * ============================================================
  */
 
-const TEAM_MEMBERS = [
+/* ── DATA: 6 MEMBERS OF NHÓM 1 ── */
+const MEMBERS = [
   {
     id: "bui-gia-hung",
     name: "Bùi Gia Hưng",
     role: "Smart Logistics & AI Developer",
     category: "ai-data",
-    secondaryCategories: ["backend"],
-    university: "Đại học Giao thông Vận tải TP.HCM (UTH)",
+    secondaryCats: ["backend"],
     avatar: "hub_assets/hung_avatar.jpg",
     status: "available",
     statusText: "Available for Projects",
-    bio: "Sinh viên Năm 3 CNTT chuyên sâu Smart Logistics & AI tại UTH. Nghiên cứu thị giác máy tính YOLOv8, giải pháp giám sát chuỗi lạnh Cold Chain IoT và giải thuật tối ưu hóa chuỗi cung ứng.",
-    skills: ["YOLOv8", "Python", "Computer Vision", "Cold Chain IoT", "C++", "C#", "DSA", "OpenCV"],
+    bio: "Sinh viên Năm 3 CNTT chuyên sâu Smart Logistics & AI tại UTH — nghiên cứu thị giác máy tính YOLOv8, giám sát chuỗi lạnh Cold Chain IoT và tối ưu hóa giải thuật chuỗi cung ứng.",
     highlights: [
-      "Hệ thống giám sát chuỗi lạnh Cold Chain tích hợp IoT",
-      "Mô hình nhận diện phương tiện giao thông YOLOv8",
-      "Tối ưu thuật toán cấu trúc dữ liệu chuỗi cung ứng"
+      "Hệ thống giám sát Cold Chain IoT tích hợp YOLOv8",
+      "Tối ưu thuật toán chuỗi cung ứng & DSA"
     ],
+    skills: ["YOLOv8", "Python", "Computer Vision", "Cold Chain", "C++", "C#", "DSA", "OpenCV"],
     entry: "./portfolio_hung/index1.html",
-    socials: {
-      github: "https://github.com/",
-      email: "mailto:ghung0610gh@gmail.com"
-    },
-    glowClass: "glow-ai",
-    badgeCategory: "AI & Smart Logistics"
+    github: "https://github.com/",
+    glow: "glow-ai",
+    catLabel: "AI & Smart Logistics"
   },
   {
     id: "pham-gia-khiem",
     name: "Phạm Gia Khiêm (Ryuu)",
     role: "Android & Backend Developer",
     category: "mobile",
-    secondaryCategories: ["backend"],
-    university: "Đại học Giao thông Vận tải TP.HCM (UTH)",
+    secondaryCats: ["backend"],
     avatar: "hub_assets/khiem_avatar.jpg",
     status: "open",
     statusText: "Open to Work",
-    bio: "Sinh viên CNTT năm 3 UTH định hướng lập trình di động Android hiện đại và kiến trúc Backend tin cậy. Đam mê tương tác mượt mà, mỹ học giao diện tinh tế phong cách Nhật Bản.",
-    skills: ["Android", "Kotlin", "Jetpack Compose", "Python FastAPI", "SQL Server", "Supabase", "Git", "Canvas Animation"],
+    bio: "Sinh viên CNTT năm 3 UTH — định hướng Android hiện đại và kiến trúc Backend tin cậy. Đam mê UX tinh tế, hiệu ứng canvas cánh hoa rơi và phong cách mỹ học Nhật Bản.",
     highlights: [
-      "Smart Heritage - Hệ thống tham quan di sản dùng iBeacon",
-      "Lost & Found - Nền tảng kết nối tìm kiếm đồ thất lạc",
-      "Giao diện tương tác hiệu ứng cánh hoa rơi Petals Canvas"
+      "Smart Heritage — Ứng dụng khám phá di sản văn hóa số",
+      "Lost & Found — Nền tảng kết nối tìm kiếm đồ thất lạc"
     ],
+    skills: ["Android", "Kotlin", "Java", "Backend API", "Git", "Canvas", "RESTful", "Database"],
     entry: "./portfolio_khiem/index.html",
-    socials: {
-      github: "https://github.com/KhiemPham1512",
-      email: "mailto:khiemanh94@gmail.com"
-    },
-    glowClass: "glow-mobile",
-    badgeCategory: "Mobile & Backend"
+    github: "https://github.com/",
+    glow: "glow-mobile",
+    catLabel: "Mobile & Backend"
   },
   {
     id: "doan-dang-khoa",
     name: "Đoàn Đăng Khoa",
     role: "Frontend & Web Developer",
     category: "frontend",
-    secondaryCategories: ["ui-ux"],
-    university: "Đại học Giao thông Vận tải TP.HCM (UTH)",
+    secondaryCats: ["ui-ux"],
     avatar: "hub_assets/khoa_avatar.png",
     status: "available",
     statusText: "Available for Hire",
-    bio: "Sinh viên Công nghệ thông tin UTH. Yêu thích công nghệ web, thiết kế giao diện hiện đại, tối ưu trải nghiệm tương tác trực quan và khả năng tương thích cao trên mọi thiết bị.",
-    skills: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "UI Development", "Web Layouts"],
+    bio: "Sinh viên CNTT UTH — yêu thích thiết kế giao diện web hiện đại, responsive toàn diện, tối ưu UX tương tác trực quan và khả năng tương thích cao trên mọi thiết bị.",
     highlights: [
-      "Thiết kế Portfolio cá nhân chuẩn Responsive toàn diện",
-      "Hệ thống điều hướng động mượt mà cho website",
-      "Tối ưu hóa bố cục giao diện người dùng thân thiện"
+      "Portfolio cá nhân chuẩn Responsive toàn diện",
+      "Hệ thống điều hướng động & UX thân thiện"
     ],
+    skills: ["HTML5", "CSS3", "JavaScript", "Responsive", "UI Dev", "Web Layouts"],
     entry: "./portfolio_khoa/index2.html",
-    socials: {
-      github: "https://github.com/",
-      email: "mailto:khoadd4552@ut.edu.vn"
-    },
-    glowClass: "glow-frontend",
-    badgeCategory: "Frontend & Web"
+    github: "https://github.com/",
+    glow: "glow-frontend",
+    catLabel: "Frontend & Web"
   },
   {
     id: "nguyen-dang-khoi",
     name: "Nguyễn Đăng Khôi",
     role: "Fullstack Developer & CS Student",
     category: "backend",
-    secondaryCategories: ["frontend"],
-    university: "Đại học Giao thông Vận tải TP.HCM (UTH)",
+    secondaryCats: ["frontend"],
     avatar: "hub_assets/khoi_avatar.jpg",
     status: "available",
     statusText: "Available for Hire",
-    bio: "Sinh viên CNTT năm 3 UTH. Biến ý tưởng thành hiện thực với code. Đam mê xây dựng webapp thực tế, hệ thống WebSocket giao tiếp thời gian thực và kiến trúc ứng dụng Django.",
-    skills: ["JavaScript", "Python", "Django", "WebSocket", "TCP/IP", "C/C++", "HTML/CSS", "SQLite"],
+    bio: "Biến ý tưởng thành hiện thực với code. Đam mê xây dựng webapp thực tế, hệ thống WebSocket giao tiếp thời gian thực và kiến trúc Django. Giải Nhì Hackathon UTH 2024.",
     highlights: [
-      "Chatties App - Ứng dụng chat thời gian thực WebSocket & TCP/IP",
-      "Hệ thống webapp quản lý điểm sinh viên với Django & SQLite",
-      "Giải Nhì Hackathon Sinh viên UTH 2024"
+      "Chatties — Chat app thời gian thực WebSocket/TCP-IP",
+      "Webapp quản lý điểm sinh viên Django & SQLite"
     ],
+    skills: ["JavaScript", "Python", "Django", "WebSocket", "C/C++", "HTML/CSS", "SQLite", "Git"],
     entry: "./portfolio_khoi/index.html",
-    socials: {
-      github: "https://github.com/Khoi2310",
-      email: "mailto:dangkhoinguyen2310@gmail.com",
-      facebook: "https://www.facebook.com/baka2310"
-    },
-    glowClass: "glow-backend",
-    badgeCategory: "Fullstack & Backend"
+    github: "https://github.com/Khoi2310",
+    glow: "glow-backend",
+    catLabel: "Fullstack & Backend"
   },
   {
     id: "nguyen-duy-tan",
     name: "Nguyễn Duy Tân",
     role: "Frontend & Data Visualization Specialist",
     category: "frontend",
-    secondaryCategories: ["ai-data", "ui-ux"],
-    university: "Đại học Giao thông Vận tải TP.HCM (UTH)",
+    secondaryCats: ["ai-data", "ui-ux"],
     avatar: "hub_assets/tan_avatar.png",
     status: "available",
     statusText: "Available for Projects",
-    bio: "Lập trình viên Frontend kết hợp Trực quan hóa Dữ liệu (Data Visualization). Thiết kế giao diện sang trọng tông màu ấm Terracotta & Espresso với Tailwind CSS và biểu đồ phân tích chuyên sâu.",
-    skills: ["React", "Tailwind CSS", "Data Visualization", "Chart.js", "D3.js", "JavaScript", "UI/UX"],
+    bio: "Frontend Developer kết hợp Data Visualization — thiết kế giao diện sang trọng tông màu Terracotta & Espresso với Tailwind CSS và biểu đồ phân tích dữ liệu chuyên sâu.",
     highlights: [
-      "Dashboard trực quan hóa dữ liệu và biểu đồ phân tích chuyên sâu",
-      "Giao diện tông màu ấm Terracotta & Espresso sang trọng",
-      "Trải nghiệm cuộn mượt mà (smooth scrolling) & tối ưu hóa A11y"
+      "Dashboard trực quan hóa dữ liệu & biểu đồ phân tích",
+      "Giao diện Terracotta/Espresso Tailwind + A11y"
     ],
+    skills: ["React", "Tailwind CSS", "Data Viz", "Chart.js", "D3.js", "JavaScript", "UI/UX"],
     entry: "./portfolio_tan/index3.html",
-    socials: {
-      github: "https://github.com/",
-      email: "mailto:duytan13012006@gmail.com"
-    },
-    glowClass: "glow-frontend",
-    badgeCategory: "Frontend & Data"
+    github: "https://github.com/",
+    glow: "glow-frontend",
+    catLabel: "Frontend & Data"
   },
   {
     id: "dinh-thanh-thien",
     name: "Đinh Thanh Thiên",
-    role: "Python Backend & Smart Logistics Developer",
+    role: "Python Backend & AI Developer",
     category: "backend",
-    secondaryCategories: ["ai-data", "ui-ux"],
-    university: "Đại học Giao thông Vận tải TP.HCM (UTH)",
-    avatar: "./portfolio_thien/ảnh thiên.jpg",
+    secondaryCats: ["ai-data"],
+    avatar: "hub_assets/thien_avatar.jpg",
     status: "open",
     statusText: "Open to Work",
-    bio: "Sinh viên ngành CNTT & Smart Logistics tại UTH. Tập trung phát triển hệ thống Backend Python (FastAPI / Flask), cơ sở dữ liệu SQL và ứng dụng Machine Learning vào bài toán tối ưu cước phí, định tuyến giao nhận thực tế.",
-    skills: ["Python", "FastAPI", "Flask", "PostgreSQL", "RabbitMQ", "PyTorch", "Docker", "Smart Logistics"],
+    bio: "Sinh viên năm 2 UTH — Backend Python (FastAPI/Flask), SQL, Docker và Machine Learning (PyTorch, Scikit-learn) ứng dụng vào bài toán tối ưu cước phí & chuỗi cung ứng thực tế.",
     highlights: [
-      "B2B Smart Logistics Freight & Routing REST API (DIM Weight)",
-      "Nền tảng Web Thương mại Điện tử UTH (FastAPI + RabbitMQ)",
-      "Phân loại Ảnh CNN (94.67%) & Dự báo Giá Vàng ML Predictor"
+      "B2B Smart Logistics Freight & Routing REST API",
+      "Gold Price ML Predictor — Yahoo Finance + FastAPI"
     ],
+    skills: ["Python", "FastAPI", "Flask", "PostgreSQL", "PyTorch", "Docker", "Scikit-learn", "SQL"],
     entry: "./portfolio_thien/portfolio.html",
-    socials: {
-      github: "https://github.com/dinhthanhthien10-bit",
-      email: "mailto:dinhthanhthien@uth.edu.vn"
-    },
-    glowClass: "glow-uiux",
-    badgeCategory: "Backend & Logistics"
+    github: "https://github.com/dinhthanhthien10-bit",
+    glow: "glow-backend",
+    catLabel: "Python Backend & AI"
   }
 ];
 
-const CATEGORIES = [
-  { id: "all", label: "Tất cả thành viên" },
+/* ── CATEGORIES ── */
+const CATS = [
+  { id: "all",      label: "Tất cả thành viên" },
   { id: "frontend", label: "Frontend & Web" },
-  { id: "backend", label: "Backend & Systems" },
-  { id: "ai-data", label: "AI & Data Science" },
-  { id: "mobile", label: "Mobile & Android" },
-  { id: "ui-ux", label: "UI/UX & Design" }
+  { id: "backend",  label: "Backend & Systems" },
+  { id: "ai-data",  label: "AI & Data Science" },
+  { id: "mobile",   label: "Mobile & Android" },
+  { id: "ui-ux",    label: "UI/UX & Design" }
 ];
 
-// App State
-const state = {
-  searchTerm: "",
-  activeCategory: "all",
-  sortBy: "default",
-  viewMode: "grid", // "grid" | "list"
-  activeMemberId: null,
-  deviceMode: "desktop", // "desktop" | "tablet" | "mobile"
-  theme: localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+/* ── APPLICATION STATE ── */
+const S = {
+  search: "",
+  cat: "all",
+  sort: "default",
+  view: "grid",
+  activeId: null,
+  device: "desktop",
+  theme: localStorage.getItem("nhom1_theme") || (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
 };
 
-// Initialize Application
+/* ── SAFE DOM GETTER UTILITY ── */
+const getEl = (...ids) => {
+  for (const id of ids) {
+    const el = document.getElementById(id);
+    if (el) return el;
+  }
+  return null;
+};
+
+/* ── BOOTSTRAP ── */
 document.addEventListener("DOMContentLoaded", () => {
-  initTheme();
-  renderCategoryTabs();
+  applyTheme();
+  renderCats();
   renderMembers();
   bindEvents();
   initRouting();
 });
 
-// Theme Management
-function initTheme() {
-  if (state.theme === "dark") {
-    document.documentElement.classList.add("dark");
-  } else {
-    document.documentElement.classList.remove("dark");
+/* ── THEME ENGINE (LIGHT / DARK) ── */
+function applyTheme() {
+  const isDark = S.theme === "dark";
+  document.documentElement.classList.toggle("dark", isDark);
+
+  const sunIcon  = getEl("theme-sun-icon", "theme-sun");
+  const moonIcon = getEl("theme-moon-icon", "theme-moon");
+
+  if (sunIcon && moonIcon) {
+    sunIcon.classList.toggle("hidden", !isDark);
+    moonIcon.classList.toggle("hidden", isDark);
+    sunIcon.style.display  = isDark ? "block" : "none";
+    moonIcon.style.display = isDark ? "none" : "block";
   }
-  updateThemeIcon();
 }
 
 function toggleTheme() {
-  state.theme = state.theme === "dark" ? "light" : "dark";
-  localStorage.setItem("theme", state.theme);
-  if (state.theme === "dark") {
-    document.documentElement.classList.add("dark");
-  } else {
-    document.documentElement.classList.remove("dark");
-  }
-  updateThemeIcon();
+  S.theme = S.theme === "dark" ? "light" : "dark";
+  localStorage.setItem("nhom1_theme", S.theme);
+  applyTheme();
 }
 
-function updateThemeIcon() {
-  const sunIcon = document.getElementById("theme-sun-icon");
-  const moonIcon = document.getElementById("theme-moon-icon");
-  if (sunIcon && moonIcon) {
-    if (state.theme === "dark") {
-      sunIcon.classList.remove("hidden");
-      moonIcon.classList.add("hidden");
-    } else {
-      sunIcon.classList.add("hidden");
-      moonIcon.classList.remove("hidden");
-    }
-  }
+/* ── CATEGORY FILTER TABS ── */
+function catCount(catId) {
+  if (catId === "all") return MEMBERS.length;
+  return MEMBERS.filter(m => m.category === catId || (m.secondaryCats && m.secondaryCats.includes(catId))).length;
 }
 
-// Category Tabs Rendering with Pill Style
-function renderCategoryTabs() {
-  const container = document.getElementById("category-tabs-container");
+function renderCats() {
+  const container = getEl("category-tabs-container", "cat-tabs");
   if (!container) return;
 
-  container.innerHTML = CATEGORIES.map(cat => {
-    const count = getCategoryCount(cat.id);
-    const isActive = state.activeCategory === cat.id;
+  container.innerHTML = CATS.map(c => {
+    const active = S.cat === c.id;
+    const count = catCount(c.id);
+
     return `
       <button 
-        type="button"
-        onclick="setCategory('${cat.id}')"
-        class="category-tab px-4 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center gap-2 whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/40 ${
-          isActive 
-            ? "bg-[#4F46E5] text-white shadow-md shadow-[#4F46E5]/25 scale-105" 
-            : "bg-[#F1F5F9] dark:bg-slate-800 text-[#64748B] dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700/80"
+        type="button" 
+        onclick="setCat('${c.id}')"
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer select-none ${
+          active 
+            ? 'bg-[#4F46E5] text-white shadow-md shadow-indigo-600/25 ring-2 ring-indigo-500/20 scale-105' 
+            : 'bg-slate-100 hover:bg-slate-200 text-slate-600 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-300'
         }"
-        aria-pressed="${isActive}"
+        aria-pressed="${active}"
       >
-        <span>${cat.label}</span>
-        <span class="text-xs px-2 py-0.5 rounded-full ${
-          isActive 
-            ? "bg-white/25 text-white font-bold" 
-            : "bg-white dark:bg-slate-700 text-[#64748B] dark:text-slate-400 font-medium"
-        }">${count}</span>
+        <span>${c.label}</span>
+        <span class="px-2 py-0.5 rounded-full text-[11px] font-extrabold ${
+          active 
+            ? 'bg-white/20 text-white' 
+            : 'bg-white dark:bg-slate-700 text-slate-600 dark:text-slate-300 shadow-sm'
+        }">
+          ${count}
+        </span>
       </button>
     `;
   }).join("");
 }
 
-function getCategoryCount(catId) {
-  if (catId === "all") return TEAM_MEMBERS.length;
-  return TEAM_MEMBERS.filter(m => m.category === catId || (m.secondaryCategories && m.secondaryCategories.includes(catId))).length;
-}
-
-function setCategory(catId) {
-  state.activeCategory = catId;
-  renderCategoryTabs();
+function setCat(catId) {
+  S.cat = catId;
+  renderCats();
   renderMembers();
 }
 
-// Filtering & Sorting
-function getFilteredMembers() {
-  return TEAM_MEMBERS.filter(m => {
-    const matchCat = state.activeCategory === "all" || 
-      m.category === state.activeCategory || 
-      (m.secondaryCategories && m.secondaryCategories.includes(state.activeCategory));
-    if (!matchCat) return false;
+/* ── SKILL CLICK FILTER ── */
+function filterBySkill(skill) {
+  S.search = skill;
+  const searchInput = getEl("search-input");
+  const clearBtn = getEl("clear-search-btn", "search-clear");
+  
+  if (searchInput) searchInput.value = skill;
+  if (clearBtn) clearBtn.style.display = "flex";
 
-    if (!state.searchTerm.trim()) return true;
-    const q = state.searchTerm.toLowerCase().trim();
-    const matchName = m.name.toLowerCase().includes(q);
-    const matchRole = m.role.toLowerCase().includes(q);
-    const matchBio = m.bio.toLowerCase().includes(q);
-    const matchSkills = m.skills.some(s => s.toLowerCase().includes(q));
-    const matchHighlights = m.highlights.some(h => h.toLowerCase().includes(q));
+  renderMembers();
 
-    return matchName || matchRole || matchBio || matchSkills || matchHighlights;
+  const container = getEl("members-container");
+  if (container) {
+    container.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
+/* ── SEARCH & FILTER LOGIC ── */
+function getFiltered() {
+  const q = S.search.trim().toLowerCase();
+
+  return MEMBERS.filter(m => {
+    // 1. Category matching
+    const inCat = (S.cat === "all") || (m.category === S.cat) || (m.secondaryCats && m.secondaryCats.includes(S.cat));
+    if (!inCat) return false;
+
+    // 2. Query matching (Name, Role, Bio, Skills, Highlights, CatLabel)
+    if (!q) return true;
+
+    return (
+      m.name.toLowerCase().includes(q) ||
+      m.role.toLowerCase().includes(q) ||
+      m.bio.toLowerCase().includes(q)  ||
+      (m.catLabel && m.catLabel.toLowerCase().includes(q)) ||
+      m.skills.some(s => s.toLowerCase().includes(q)) ||
+      m.highlights.some(h => h.toLowerCase().includes(q))
+    );
   }).sort((a, b) => {
-    if (state.sortBy === "name-asc") {
-      return a.name.localeCompare(b.name, 'vi');
-    }
-    if (state.sortBy === "role") {
-      return a.role.localeCompare(b.role, 'vi');
-    }
-    if (state.sortBy === "status") {
-      return a.status === "available" ? -1 : 1;
-    }
-    return 0;
+    if (S.sort === "name-asc") return a.name.localeCompare(b.name, "vi");
+    if (S.sort === "role")     return a.role.localeCompare(b.role, "vi");
+    if (S.sort === "status")   return a.status === "available" ? -1 : 1;
+    return 0; // default order
   });
 }
 
-// Render Members Grid / List
+/* ── MEMBER GRID RENDERER ── */
 function renderMembers() {
-  const container = document.getElementById("members-container");
-  const resultCount = document.getElementById("result-count");
-  const filtered = getFilteredMembers();
+  const container = getEl("members-container");
+  const countEl   = getEl("result-count");
+  if (!container) return;
 
-  if (resultCount) {
-    resultCount.innerHTML = `Hiển thị <span class="font-bold text-[#4F46E5] dark:text-indigo-400">${filtered.length}</span> / ${TEAM_MEMBERS.length} thành viên Nhóm 1`;
+  const list = getFiltered();
+
+  if (countEl) {
+    countEl.innerHTML = `Hiển thị <strong class="text-[#4F46E5] dark:text-indigo-400 font-extrabold">${list.length}</strong> / ${MEMBERS.length} thành viên Nhóm 1`;
   }
 
-  if (filtered.length === 0) {
+  // Handle Grid vs List layout
+  if (S.view === "list") {
+    container.className = "view-list-container";
+  } else {
+    container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8";
+  }
+
+  // Empty state handling
+  if (list.length === 0) {
     container.innerHTML = `
-      <div class="col-span-full py-16 text-center">
-        <div class="w-18 h-18 mx-auto mb-4 rounded-2xl bg-indigo-50 dark:bg-slate-800 flex items-center justify-center text-[#4F46E5]">
-          <svg class="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="col-span-full py-16 px-4 text-center">
+        <div class="w-18 h-18 sm:w-20 sm:h-20 rounded-2xl bg-indigo-50 dark:bg-indigo-950/40 text-[#4F46E5] dark:text-indigo-400 mx-auto flex items-center justify-center mb-5 shadow-inner">
+          <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
           </svg>
         </div>
-        <h3 class="text-xl font-bold text-[#0F172A] dark:text-white mb-2">Không tìm thấy thành viên phù hợp</h3>
-        <p class="text-[#64748B] dark:text-slate-400 max-w-md mx-auto mb-6 text-sm">
-          Không có thành viên Nhóm 1 nào khớp với từ khóa "<strong>${escapeHtml(state.searchTerm)}</strong>" trong danh mục này.
+        <h3 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mb-2">
+          Không tìm thấy thành viên phù hợp
+        </h3>
+        <p class="text-sm sm:text-base text-slate-500 dark:text-slate-400 max-w-md mx-auto mb-6">
+          Không có kết quả nào khớp với từ khóa "<strong>${esc(S.search)}</strong>" trong danh mục đang chọn.
         </p>
         <button 
-          onclick="resetFilters()" 
-          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#4F46E5] text-white font-semibold text-sm hover:bg-indigo-700 shadow-md shadow-indigo-500/25 transition-all"
+          onclick="resetAll()"
+          type="button"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#4F46E5] hover:bg-indigo-700 text-white font-bold text-sm shadow-md shadow-indigo-600/30 transition-all hover:-translate-y-0.5"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
           </svg>
-          Đặt lại bộ lọc
+          <span>Đặt lại tìm kiếm &amp; bộ lọc</span>
         </button>
       </div>
     `;
     return;
   }
 
-  if (state.viewMode === "grid") {
-    container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8";
-    container.innerHTML = filtered.map(member => renderMemberCard(member)).join("");
-  } else {
-    container.className = "space-y-4";
-    container.innerHTML = filtered.map(member => renderMemberList(member)).join("");
-  }
+  container.innerHTML = list.map(renderCard).join("");
 }
 
-// Render Member Card (Grid Mode)
-function renderMemberCard(m) {
-  const isAvailable = m.status === "available";
-  const statusColorClass = isAvailable ? "bg-[#10B981]" : "bg-blue-500";
-  const statusPulseClass = isAvailable ? "pulse-emerald" : "";
-  const statusBadgeClass = isAvailable 
-    ? "text-[#059669] dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 border-emerald-200/80 dark:border-emerald-800/80" 
-    : "text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/60 border-blue-200/80 dark:border-blue-800/80";
+/* ── INDIVIDUAL CARD COMPONENT ── */
+function renderCard(m) {
+  const isAvail = m.status === "available";
+  const statusBg = isAvail 
+    ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800/60"
+    : "bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300 border-blue-200 dark:border-blue-800/60";
+  const dotColor = isAvail ? "emerald" : "blue";
+  const maxSkills = 5;
 
   return `
-    <article 
-      class="nhom1-card card-glow-nhom1 ${m.glowClass} p-6 flex flex-col justify-between group"
-      data-member-id="${m.id}"
-    >
-      <div>
-        <!-- Top Status & Category Header -->
-        <div class="flex items-center justify-between mb-5 gap-2">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold border ${statusBadgeClass}">
-            <span class="w-2 h-2 rounded-full ${statusColorClass} ${statusPulseClass}"></span>
+    <article class="member-card ${m.glow} group" data-id="${m.id}">
+      <div class="card-inner">
+        
+        <!-- Status & Category Row -->
+        <div class="flex items-center justify-between gap-2 mb-4">
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold border ${statusBg}">
+            <span class="status-dot-pulse ${dotColor}"></span>
             <span>${m.statusText}</span>
           </span>
-          <span class="text-xs font-medium text-[#64748B] dark:text-slate-400 bg-[#F1F5F9] dark:bg-slate-800 px-3 py-1 rounded-full">
-            ${m.badgeCategory}
+          <span class="text-[11px] font-bold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2.5 py-0.5 rounded-full">
+            ${m.catLabel}
           </span>
         </div>
 
-        <!-- Avatar & Basic Info -->
-        <div class="flex items-start gap-4 mb-4">
-          <div class="relative flex-shrink-0">
-            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border-2 border-white dark:border-slate-700 shadow-sm group-hover:scale-105 transition-transform duration-300 bg-slate-100 dark:bg-slate-800">
-              <img 
-                src="${m.avatar}" 
-                alt="${m.name}" 
-                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(m.name)}&background=4F46E5&color=fff&size=128';"
-                loading="lazy"
-              />
-            </div>
+        <!-- Avatar & Name Header -->
+        <div class="flex items-start gap-4 mb-3">
+          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden ring-2 ring-slate-100 dark:ring-slate-800 shadow-md group-hover:scale-105 transition-transform duration-300 flex-shrink-0 bg-slate-100 dark:bg-slate-800">
+            <img 
+              src="${m.avatar}" 
+              alt="${m.name}"
+              loading="lazy"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(m.name)}&background=4F46E5&color=fff&size=160'"
+            />
           </div>
-          
-          <div class="flex-1 min-w-0">
-            <h3 class="text-lg sm:text-xl font-bold text-[#0F172A] dark:text-white truncate group-hover:text-[#4F46E5] dark:group-hover:text-indigo-400 transition-colors">
+          <div class="min-w-0 flex-1">
+            <h3 class="text-lg sm:text-xl font-black text-slate-900 dark:text-white truncate group-hover:text-[#4F46E5] dark:group-hover:text-indigo-400 transition-colors leading-tight">
               ${m.name}
             </h3>
-            <p class="text-xs sm:text-sm font-semibold text-[#4F46E5] dark:text-indigo-400 mb-1 leading-snug">
+            <p class="text-xs sm:text-sm font-bold text-[#4F46E5] dark:text-indigo-400 mt-1 line-clamp-1">
               ${m.role}
             </p>
-            <p class="text-xs text-[#64748B] dark:text-slate-400 flex items-center gap-1">
-              <svg class="w-3.5 h-3.5 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1.5 mt-1 font-medium">
+              <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
               </svg>
-              <span class="truncate">Nhóm 1 &bull; CNTT UTH</span>
+              <span>Nhóm 1 &bull; UTH</span>
             </p>
           </div>
         </div>
 
-        <!-- Bio / Tagline -->
-        <p class="text-xs sm:text-sm text-[#64748B] dark:text-slate-300 line-clamp-3 mb-4 leading-relaxed bg-[#FAF8FF] dark:bg-slate-800/40 p-3 rounded-xl border border-indigo-50 dark:border-slate-800">
-          "${m.bio}"
-        </p>
+        <!-- Tagline / Bio Quote Box -->
+        <div class="member-bio-box mb-4">
+          <p class="text-xs text-slate-600 dark:text-slate-300 italic bg-slate-50 dark:bg-slate-800/60 p-3 rounded-xl border border-slate-100 dark:border-slate-800 line-clamp-3 leading-relaxed">
+            "${m.bio}"
+          </p>
+        </div>
 
-        <!-- Highlights / Dự án nổi bật -->
-        <div class="mb-4">
-          <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">Dự án tiêu biểu</p>
-          <ul class="space-y-1.5 text-xs text-[#64748B] dark:text-slate-300">
-            ${m.highlights.slice(0, 2).map(hl => `
-              <li class="flex items-start gap-1.5 line-clamp-1">
-                <span class="text-[#4F46E5] font-bold flex-shrink-0">&bull;</span>
-                <span class="truncate">${hl}</span>
+        <!-- Highlights Bullet Points -->
+        <div class="highlights-box mb-4">
+          <p class="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider mb-1.5">
+            Dự án &amp; Năng lực tiêu biểu
+          </p>
+          <ul class="space-y-1 text-xs text-slate-600 dark:text-slate-300">
+            ${m.highlights.map(h => `
+              <li class="flex items-start gap-1.5 truncate">
+                <span class="text-[#4F46E5] dark:text-indigo-400 font-black leading-none mt-0.5">▸</span>
+                <span class="truncate">${h}</span>
               </li>
             `).join("")}
           </ul>
         </div>
 
-        <!-- Key Skills -->
+        <!-- Skill Badges -->
         <div class="mb-5">
-          <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">Kỹ năng cốt lõi</p>
+          <p class="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider mb-2">
+            Kỹ năng cốt lõi
+          </p>
           <div class="flex flex-wrap gap-1.5">
-            ${m.skills.slice(0, 5).map(skill => `
-              <span class="text-xs font-medium px-2.5 py-1 rounded-lg bg-[#F8FAFC] dark:bg-slate-800 text-[#0F172A] dark:text-slate-300 border border-slate-200/70 dark:border-slate-700/60">
-                ${skill}
-              </span>
+            ${m.skills.slice(0, maxSkills).map(s => `
+              <button 
+                type="button" 
+                onclick="filterBySkill('${s}')" 
+                class="skill-badge-btn"
+                title="Bấm để lọc theo kỹ năng ${s}"
+              >
+                ${s}
+              </button>
             `).join("")}
-            ${m.skills.length > 5 ? `
-              <span class="text-xs font-bold px-2 py-1 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-[#4F46E5] dark:text-indigo-400">
-                +${m.skills.length - 5}
+            ${m.skills.length > maxSkills ? `
+              <span class="inline-flex items-center px-2 py-0.5 rounded-lg text-xs font-bold bg-indigo-50 dark:bg-indigo-950/60 text-[#4F46E5] dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800/50">
+                +${m.skills.length - maxSkills}
               </span>
             ` : ""}
           </div>
         </div>
-      </div>
 
-      <!-- Footer Action Buttons -->
-      <div class="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center gap-2">
-        <button 
-          type="button"
-          onclick="openViewer('${m.id}')"
-          class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#4F46E5] via-[#7C3AED] to-[#DB2777] hover:opacity-95 text-white font-bold text-xs sm:text-sm shadow-md shadow-indigo-500/20 transition-all group/btn"
-        >
-          <span>Xem Portfolio</span>
-          <svg class="w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-          </svg>
-        </button>
+        <!-- Action Buttons Footer -->
+        <div class="mt-auto pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center gap-2">
+          <!-- Primary CTA: Xem Portfolio -->
+          <button 
+            type="button" 
+            onclick="openViewer('${m.id}')"
+            class="btn-view-portfolio group/btn"
+          >
+            <span>Xem Portfolio</span>
+            <svg class="w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+          </button>
 
-        <a 
-          href="${m.entry}" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          title="Mở tab mới"
-          class="p-2.5 rounded-xl bg-[#F1F5F9] dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-[#64748B] dark:text-slate-300 transition-colors focus:ring-2 focus:ring-[#4F46E5]/50"
-          aria-label="Mở portfolio của ${m.name} trong tab mới"
-        >
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-          </svg>
-        </a>
-
-        ${m.socials.github ? `
+          <!-- Direct Tab Link -->
           <a 
-            href="${m.socials.github}" 
+            href="${m.entry}" 
             target="_blank" 
             rel="noopener noreferrer"
-            title="GitHub Profile"
-            class="p-2.5 rounded-xl bg-[#F1F5F9] dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-[#64748B] dark:text-slate-300 transition-colors"
-            aria-label="GitHub của ${m.name}"
+            class="btn-icon-action"
+            title="Mở toàn màn hình trong tab mới"
+            aria-label="Mở portfolio của ${m.name} trong tab mới"
           >
-            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
             </svg>
           </a>
-        ` : ""}
+
+          <!-- GitHub Link -->
+          <a 
+            href="${m.github}" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="btn-icon-action"
+            title="Xem GitHub của ${m.name}"
+            aria-label="Xem GitHub của ${m.name}"
+          >
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
+            </svg>
+          </a>
+        </div>
+
       </div>
     </article>
   `;
 }
 
-// Render Member Item (List Mode)
-function renderMemberList(m) {
-  const isAvailable = m.status === "available";
-  const statusColorClass = isAvailable ? "bg-[#10B981]" : "bg-blue-500";
-  const statusPulseClass = isAvailable ? "pulse-emerald" : "";
+/* ── VIEW ENGINE MODAL CONTROLLER ── */
+function openViewer(id) {
+  const m = MEMBERS.find(x => x.id === id);
+  if (!m) return;
 
-  return `
-    <article 
-      class="nhom1-card card-glow-nhom1 ${m.glowClass} p-4 sm:p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 group"
-      data-member-id="${m.id}"
-    >
-      <div class="flex items-center gap-4 flex-1 min-w-0">
-        <div class="w-14 h-14 rounded-2xl overflow-hidden border-2 border-white dark:border-slate-700 shadow-sm flex-shrink-0 bg-slate-100 dark:bg-slate-800">
-          <img 
-            src="${m.avatar}" 
-            alt="${m.name}" 
-            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(m.name)}&background=4F46E5&color=fff&size=128';"
-            loading="lazy"
-          />
-        </div>
+  S.activeId = id;
 
-        <div class="min-w-0 flex-1">
-          <div class="flex items-center gap-2 flex-wrap">
-            <h3 class="text-base sm:text-lg font-bold text-[#0F172A] dark:text-white group-hover:text-[#4F46E5] dark:group-hover:text-indigo-400 transition-colors truncate">
-              ${m.name}
-            </h3>
-            <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#F1F5F9] dark:bg-slate-800 text-[#0F172A] dark:text-slate-300">
-              <span class="w-1.5 h-1.5 rounded-full ${statusColorClass} ${statusPulseClass}"></span>
-              ${m.statusText}
-            </span>
-          </div>
-          <p class="text-xs sm:text-sm font-semibold text-[#4F46E5] dark:text-indigo-400 truncate">
-            ${m.role}
-          </p>
-          <div class="flex items-center gap-1.5 mt-1 flex-wrap">
-            ${m.skills.slice(0, 4).map(skill => `
-              <span class="text-xs px-2 py-0.5 rounded-md bg-[#F8FAFC] dark:bg-slate-800 text-[#64748B] dark:text-slate-400 border border-slate-200/60 dark:border-slate-700/60">
-                ${skill}
-              </span>
-            `).join("")}
-          </div>
-        </div>
-      </div>
-
-      <div class="flex items-center gap-2 w-full md:w-auto justify-end pt-3 md:pt-0 border-t md:border-t-0 border-slate-100 dark:border-slate-800">
-        <button 
-          type="button"
-          onclick="openViewer('${m.id}')"
-          class="flex-1 md:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-[#4F46E5] hover:bg-indigo-700 text-white font-bold text-xs sm:text-sm shadow-sm transition-all"
-        >
-          <span>Xem Portfolio</span>
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-          </svg>
-        </button>
-
-        <a 
-          href="${m.entry}" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          class="p-2 rounded-xl bg-[#F1F5F9] dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-[#64748B] dark:text-slate-300 transition-colors"
-          title="Mở tab mới"
-        >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-          </svg>
-        </a>
-      </div>
-    </article>
-  `;
-}
-
-// VIEW ENGINE: Fullscreen Modal / Device Switcher
-function openViewer(memberId) {
-  const member = TEAM_MEMBERS.find(m => m.id === memberId);
-  if (!member) return;
-
-  state.activeMemberId = memberId;
-  window.location.hash = `portfolio/${memberId}`;
-
-  const modal = document.getElementById("portfolio-viewer-modal");
-  const iframe = document.getElementById("viewer-frame");
-  const loading = document.getElementById("viewer-loading");
-  const nameEl = document.getElementById("viewer-member-name");
-  const roleEl = document.getElementById("viewer-member-role");
-  const avatarEl = document.getElementById("viewer-member-avatar");
-  const newTabBtn = document.getElementById("viewer-open-tab-btn");
-
-  if (nameEl) nameEl.textContent = member.name;
-  if (roleEl) roleEl.textContent = member.role;
-  if (avatarEl) {
-    avatarEl.src = member.avatar;
-    avatarEl.alt = member.name;
+  // Sync Hash Route & Title
+  if (window.location.hash !== `#portfolio/${id}`) {
+    history.pushState({ portfolioId: id }, "", `#portfolio/${id}`);
   }
-  if (newTabBtn) {
-    newTabBtn.href = member.entry;
+  document.title = `${m.name} — Portfolio Nhóm 1 | UTH`;
+
+  const modal       = getEl("portfolio-viewer-modal", "viewer-modal");
+  const iframe      = getEl("viewer-frame", "viewer-iframe");
+  const loadingEl   = getEl("viewer-loading");
+  const nameEl      = getEl("viewer-member-name", "vw-name");
+  const roleEl      = getEl("viewer-member-role", "vw-role");
+  const avatarEl    = getEl("viewer-member-avatar", "vw-avatar");
+  const openTabBtn  = getEl("viewer-open-tab-btn", "vw-open-tab");
+
+  if (nameEl)     nameEl.textContent = m.name;
+  if (roleEl)     roleEl.textContent = m.role;
+  if (avatarEl)   { avatarEl.src = m.avatar; avatarEl.alt = m.name; }
+  if (openTabBtn) openTabBtn.href = m.entry;
+
+  if (loadingEl) loadingEl.style.display = "flex";
+  if (iframe) {
+    iframe.onload = () => {
+      if (loadingEl) loadingEl.style.display = "none";
+    };
+    iframe.src = m.entry;
   }
 
-  if (loading) loading.style.display = "flex";
+  if (modal) {
+    modal.classList.remove("hidden");
+    modal.classList.add("flex", "open");
+  }
 
-  iframe.onload = () => {
-    if (loading) loading.style.display = "none";
-  };
-  iframe.src = member.entry;
-
-  modal.classList.remove("hidden");
-  modal.classList.add("flex");
   document.body.style.overflow = "hidden";
-
-  applyDeviceMode();
+  applyDevice();
 }
 
 function closeViewer() {
-  const modal = document.getElementById("portfolio-viewer-modal");
-  const iframe = document.getElementById("viewer-frame");
+  const modal  = getEl("portfolio-viewer-modal", "viewer-modal");
+  const iframe = getEl("viewer-frame", "viewer-iframe");
 
-  modal.classList.add("hidden");
-  modal.classList.remove("flex");
+  if (modal) {
+    modal.classList.remove("flex", "open");
+    modal.classList.add("hidden");
+  }
+
   document.body.style.overflow = "";
+  if (iframe) iframe.src = "about:blank";
 
-  iframe.src = "about:blank";
-  state.activeMemberId = null;
+  S.activeId = null;
+  document.title = "Portfolio Nhóm 1 | Khám Phá Tài Năng & Năng Lực Sáng Tạo";
 
   if (window.location.hash.startsWith("#portfolio/")) {
     history.pushState("", document.title, window.location.pathname + window.location.search);
   }
 }
 
-function navigateViewer(direction) {
-  if (!state.activeMemberId) return;
-  const currentIndex = TEAM_MEMBERS.findIndex(m => m.id === state.activeMemberId);
-  if (currentIndex === -1) return;
-
-  let nextIndex = currentIndex + direction;
-  if (nextIndex < 0) nextIndex = TEAM_MEMBERS.length - 1;
-  if (nextIndex >= TEAM_MEMBERS.length) nextIndex = 0;
-
-  openViewer(TEAM_MEMBERS[nextIndex].id);
+function navigateViewer(dir) {
+  if (!S.activeId) return;
+  const idx  = MEMBERS.findIndex(m => m.id === S.activeId);
+  const next = (idx + dir + MEMBERS.length) % MEMBERS.length;
+  openViewer(MEMBERS[next].id);
 }
+const cycleMember = navigateViewer;
 
-function setDeviceMode(mode) {
-  state.deviceMode = mode;
-  applyDeviceMode();
-}
+function setDeviceMode(device) {
+  S.device = device;
+  applyDevice();
 
-function applyDeviceMode() {
-  const container = document.getElementById("viewer-device-container");
-  const buttons = document.querySelectorAll("[data-device-btn]");
+  // Update active state on device buttons
+  document.querySelectorAll("[data-device-btn], .device-btn").forEach(btn => {
+    const d = btn.getAttribute("data-device-btn") || btn.dataset.device;
+    const isActive = (d === device);
+    btn.classList.toggle("active", isActive);
 
-  if (!container) return;
-
-  container.className = "device-container";
-  if (state.deviceMode === "desktop") {
-    container.classList.add("device-desktop");
-  } else if (state.deviceMode === "tablet") {
-    container.classList.add("device-tablet");
-  } else if (state.deviceMode === "mobile") {
-    container.classList.add("device-mobile");
-  }
-
-  buttons.forEach(btn => {
-    const btnMode = btn.getAttribute("data-device-btn");
-    if (btnMode === state.deviceMode) {
+    if (isActive) {
       btn.classList.add("bg-[#4F46E5]", "text-white");
-      btn.classList.remove("text-slate-400", "hover:bg-slate-800");
+      btn.classList.remove("text-slate-400", "hover:bg-slate-700");
     } else {
       btn.classList.remove("bg-[#4F46E5]", "text-white");
-      btn.classList.add("text-slate-400", "hover:bg-slate-800");
+      btn.classList.add("text-slate-400", "hover:bg-slate-700");
     }
   });
 }
+const setDevice = setDeviceMode;
 
-// Routing & Hash Listeners
+function applyDevice() {
+  const container = getEl("viewer-device-container", "viewer-device-frame");
+  if (!container) return;
+
+  container.className = `device-container device-${S.device} device-frame ${S.device}`;
+}
+
+/* ── HASH ROUTING ── */
 function initRouting() {
-  const checkHash = () => {
+  const handleRoute = () => {
     const hash = window.location.hash;
     if (hash.startsWith("#portfolio/")) {
-      const memberId = hash.replace("#portfolio/", "");
-      if (TEAM_MEMBERS.some(m => m.id === memberId)) {
-        openViewer(memberId);
+      const id = hash.slice("#portfolio/".length);
+      if (MEMBERS.some(m => m.id === id)) {
+        openViewer(id);
       }
-    } else if (state.activeMemberId) {
+    } else if (S.activeId) {
       closeViewer();
     }
   };
 
-  window.addEventListener("hashchange", checkHash);
-  checkHash();
+  window.addEventListener("hashchange", handleRoute);
+  window.addEventListener("popstate", handleRoute);
+  
+  // Initial check on page load
+  handleRoute();
 }
 
-// Event Bindings
+/* ── EVENT LISTENERS & SHORTCUTS ── */
 function bindEvents() {
-  const searchInput = document.getElementById("search-input");
-  const clearSearchBtn = document.getElementById("clear-search-btn");
-  const sortSelect = document.getElementById("sort-select");
-  const gridViewBtn = document.getElementById("view-grid-btn");
-  const listViewBtn = document.getElementById("view-list-btn");
-  const themeToggleBtn = document.getElementById("theme-toggle-btn");
+  const searchInput = getEl("search-input");
+  const clearBtn    = getEl("clear-search-btn", "search-clear");
+  const sortSelect  = getEl("sort-select");
+  const gridBtn     = getEl("view-grid-btn");
+  const listBtn     = getEl("view-list-btn");
+  const themeBtn    = getEl("theme-toggle-btn", "theme-btn");
 
-  if (searchInput) {
-    searchInput.addEventListener("input", (e) => {
-      state.searchTerm = e.target.value;
-      if (clearSearchBtn) {
-        clearSearchBtn.style.display = state.searchTerm ? "block" : "none";
-      }
-      renderMembers();
-    });
-  }
+  // Real-time Search
+  searchInput?.addEventListener("input", e => {
+    S.search = e.target.value;
+    if (clearBtn) clearBtn.style.display = S.search ? "flex" : "none";
+    renderMembers();
+  });
 
-  if (clearSearchBtn) {
-    clearSearchBtn.addEventListener("click", () => {
-      state.searchTerm = "";
-      if (searchInput) searchInput.value = "";
-      clearSearchBtn.style.display = "none";
-      renderMembers();
-      if (searchInput) searchInput.focus();
-    });
-  }
+  clearBtn?.addEventListener("click", () => {
+    S.search = "";
+    if (searchInput) searchInput.value = "";
+    clearBtn.style.display = "none";
+    renderMembers();
+    searchInput?.focus();
+  });
 
-  if (sortSelect) {
-    sortSelect.addEventListener("change", (e) => {
-      state.sortBy = e.target.value;
-      renderMembers();
-    });
-  }
+  // Sorting
+  sortSelect?.addEventListener("change", e => {
+    S.sort = e.target.value;
+    renderMembers();
+  });
 
-  if (gridViewBtn && listViewBtn) {
-    gridViewBtn.addEventListener("click", () => {
-      state.viewMode = "grid";
-      gridViewBtn.classList.add("bg-[#4F46E5]", "text-white");
-      gridViewBtn.classList.remove("text-slate-500", "dark:text-slate-400");
-      listViewBtn.classList.remove("bg-[#4F46E5]", "text-white");
-      listViewBtn.classList.add("text-slate-500", "dark:text-slate-400");
-      renderMembers();
-    });
+  // View Mode
+  gridBtn?.addEventListener("click", () => {
+    S.view = "grid";
+    gridBtn.classList.add("bg-[#4F46E5]", "text-white");
+    gridBtn.classList.remove("text-slate-500", "dark:text-slate-400");
+    listBtn?.classList.remove("bg-[#4F46E5]", "text-white");
+    listBtn?.classList.add("text-slate-500", "dark:text-slate-400");
+    renderMembers();
+  });
 
-    listViewBtn.addEventListener("click", () => {
-      state.viewMode = "list";
-      listViewBtn.classList.add("bg-[#4F46E5]", "text-white");
-      listViewBtn.classList.remove("text-slate-500", "dark:text-slate-400");
-      gridViewBtn.classList.remove("bg-[#4F46E5]", "text-white");
-      gridViewBtn.classList.add("text-slate-500", "dark:text-slate-400");
-      renderMembers();
-    });
-  }
+  listBtn?.addEventListener("click", () => {
+    S.view = "list";
+    listBtn.classList.add("bg-[#4F46E5]", "text-white");
+    listBtn?.classList.remove("text-slate-500", "dark:text-slate-400");
+    gridBtn?.classList.remove("bg-[#4F46E5]", "text-white");
+    gridBtn?.classList.add("text-slate-500", "dark:text-slate-400");
+    renderMembers();
+  });
 
-  if (themeToggleBtn) {
-    themeToggleBtn.addEventListener("click", toggleTheme);
-  }
+  // Theme Toggle
+  themeBtn?.addEventListener("click", toggleTheme);
 
-  // Keyboard Shortcuts
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && state.activeMemberId) {
+  // Global Keyboard Shortcuts
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && S.activeId) {
       closeViewer();
+      return;
     }
-    if (state.activeMemberId) {
-      if (e.key === "ArrowLeft") navigateViewer(-1);
-      if (e.key === "ArrowRight") navigateViewer(1);
-      if (e.key === "1") setDeviceMode("desktop");
-      if (e.key === "2") setDeviceMode("tablet");
-      if (e.key === "3") setDeviceMode("mobile");
-    }
-    if ((e.key === "/" || (e.ctrlKey && e.key === "k")) && !state.activeMemberId) {
-      if (document.activeElement !== searchInput) {
+
+    if (S.activeId) {
+      if (e.key === "ArrowLeft")  { navigateViewer(-1); return; }
+      if (e.key === "ArrowRight") { navigateViewer(1);  return; }
+      if (e.key === "1") { setDeviceMode("desktop"); return; }
+      if (e.key === "2") { setDeviceMode("tablet");  return; }
+      if (e.key === "3") { setDeviceMode("mobile");  return; }
+    } else {
+      if ((e.key === "/" || (e.ctrlKey && e.key === "k")) && document.activeElement !== searchInput) {
         e.preventDefault();
         searchInput?.focus();
       }
@@ -747,28 +682,41 @@ function bindEvents() {
   });
 }
 
-function resetFilters() {
-  state.searchTerm = "";
-  state.activeCategory = "all";
-  state.sortBy = "default";
-  const searchInput = document.getElementById("search-input");
-  const sortSelect = document.getElementById("sort-select");
-  const clearSearchBtn = document.getElementById("clear-search-btn");
+/* ── RESET EVERYTHING ── */
+function resetAll() {
+  S.search = "";
+  S.cat = "all";
+  S.sort = "default";
+
+  const searchInput = getEl("search-input");
+  const sortSelect  = getEl("sort-select");
+  const clearBtn    = getEl("clear-search-btn", "search-clear");
 
   if (searchInput) searchInput.value = "";
-  if (sortSelect) sortSelect.value = "default";
-  if (clearSearchBtn) clearSearchBtn.style.display = "none";
+  if (sortSelect)  sortSelect.value = "default";
+  if (clearBtn)    clearBtn.style.display = "none";
 
-  renderCategoryTabs();
+  renderCats();
   renderMembers();
 }
 
-function escapeHtml(str) {
-  if (!str) return "";
-  return str
+/* ── ESCAPE HTML HELPER ── */
+function esc(str) {
+  return String(str)
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+    .replace(/"/g, "&quot;");
 }
+
+/* ── EXPOSE TO GLOBAL WINDOW ── */
+window.openViewer     = openViewer;
+window.closeViewer    = closeViewer;
+window.navigateViewer = navigateViewer;
+window.cycleMember    = cycleMember;
+window.setDeviceMode  = setDeviceMode;
+window.setDevice      = setDevice;
+window.setCat         = setCat;
+window.filterBySkill  = filterBySkill;
+window.resetAll       = resetAll;
+window.toggleTheme    = toggleTheme;

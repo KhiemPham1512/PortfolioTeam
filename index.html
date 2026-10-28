@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
@@ -92,51 +92,52 @@
         <button 
           id="theme-toggle-btn"
           type="button"
-          class="p-2.5 rounded-xl bg-[#F1F5F9] dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-[#0F172A] dark:text-slate-200 transition-colors focus:outline-none focus:ring-2 focus:ring-[#4F46E5]"
+          class="p-2.5 rounded-xl bg-[#F1F5F9] dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-[#0F172A] dark:text-slate-200 transition-colors focus:outline-none focus:ring-2 focus:ring-[#4F46E5] cursor-pointer"
           aria-label="Chuyển chế độ sáng/tối"
         >
           <svg id="theme-sun-icon" class="w-5 h-5 hidden text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
           </svg>
-          <svg id="theme-moon-icon" class="w-5 h-5 text-[#4F46E5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg id="theme-moon-icon" class="w-5 h-5 text-slate-700 dark:text-slate-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
           </svg>
         </button>
 
-        <!-- Badge "Live Portfolios" có chấm xanh lá nhấp nháy (#10B981) -->
-        <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/80 dark:border-emerald-800/80">
-          <span class="w-2 h-2 rounded-full bg-[#10B981] pulse-emerald"></span>
-          <span class="text-xs font-bold text-[#059669] dark:text-emerald-300">Live Portfolios</span>
+        <!-- Status Live Badge: "6 Portfolios sẵn sàng" -->
+        <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800/80 text-xs font-bold text-emerald-700 dark:text-emerald-300">
+          <span class="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
+          <span>6 Portfolios Sẵn Sàng</span>
         </div>
 
       </div>
+
     </div>
   </header>
 
 
-  <!-- ==================== 2. HERO SECTION (PHẦN ĐẦU TRANG) ==================== -->
-  <section class="relative pt-12 pb-8 sm:pt-16 sm:pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full text-center">
+  <!-- ==================== 2. HERO SECTION & BẢNG TÌM KIẾM ==================== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-6 text-center">
     
-    <!-- Top Pill Badge: Nền tím nhạt, chữ tím • Đội Ngũ Nhóm 1 • Công Nghệ Thông Tin / Thiết Kế -->
-    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-200/80 dark:border-indigo-800/80 text-[#4F46E5] dark:text-indigo-300 text-xs sm:text-sm font-bold mb-6 shadow-sm">
+    <!-- Top Pill: "Không Gian Triển Lãm Hồ Sơ Năng Lực Nhóm 1" -->
+    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-200 dark:border-indigo-800/60 text-xs sm:text-sm font-semibold text-[#4F46E5] dark:text-indigo-400 mb-6">
       <span class="w-2 h-2 rounded-full bg-[#7C3AED] animate-ping"></span>
-      <span>Đội Ngũ Nhóm 1 &bull; Công Nghệ Thông Tin / Thiết Kế</span>
+      <span>Không Gian Triển Lãm Hồ Sơ Năng Lực Nhóm 1</span>
     </div>
 
-    <!-- Tiêu đề lớn: "Khám Phá Tài Năng & Portfolio Nhóm 1" (Chữ "Portfolio Nhóm 1" đổ màu Gradient Tím - Hồng quyến rũ from-[#4F46E5] via-[#7C3AED] to-[#DB2777]) -->
+    <!-- Tiêu đề chính ấn tượng (Gradient Tím - Hồng quyến rũ) -->
     <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-[#0F172A] dark:text-white mb-6 leading-tight max-w-4xl mx-auto">
       Khám Phá Tài Năng &amp; <br class="hidden sm:inline" />
       <span class="bg-clip-text text-transparent bg-gradient-to-r from-[#4F46E5] via-[#7C3AED] to-[#DB2777]">
-        Portfolio Nhóm 1
+        Portfolio Đội Ngũ
       </span>
     </h1>
 
-    <!-- Mô tả ngắn: Giới thiệu các thành viên, chuyên môn (AI, Frontend, Backend, UI/UX, Fullstack) và sản phẩm nổi bật -->
+    <!-- Mô tả ngắn: Giới thiệu các thành viên, chuyên môn và sản phẩm nổi bật -->
     <p class="text-base sm:text-lg text-[#64748B] dark:text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed font-normal">
       Nơi hội tụ các chuyên môn vững chắc từ AI &amp; Thị giác máy tính, Lập trình ứng dụng Di động, Kiến trúc Hệ thống Backend, Thiết kế UI/UX tinh tế đến Phát triển Frontend hiện đại của Nhóm 1.
     </p>
 
-    <!-- ==================== C. BẢNG THỐNG KÊ (METRIC CARDS - 4 Ô NỔI BẬT) ==================== -->
+    <!-- ==================== BẢNG THỐNG KÊ (METRIC CARDS - 4 Ô NỔI BẬT) ==================== -->
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto mb-12">
       <!-- 1. Thành viên Nhóm 1 -->
       <div class="nhom1-metric-card p-5 text-center">
@@ -153,7 +154,7 @@
         <p class="text-2xl sm:text-4xl font-black text-[#DB2777] dark:text-pink-400 mb-1">5+</p>
         <p class="text-xs sm:text-sm font-semibold text-[#64748B] dark:text-slate-400">Lĩnh vực chuyên môn</p>
       </div>
-      <!-- 4. 100% Tinh thần hợp tác & Đúng tiến độ (#10B981) -->
+      <!-- 4. 100% Sẵn sàng hợp tác & Đúng tiến độ -->
       <div class="nhom1-metric-card p-5 text-center border-emerald-100 dark:border-emerald-900/50">
         <p class="text-2xl sm:text-4xl font-black text-[#10B981] mb-1">100%</p>
         <p class="text-xs sm:text-sm font-semibold text-[#059669] dark:text-emerald-400">Hợp tác &amp; Đúng tiến độ</p>
@@ -161,10 +162,10 @@
     </div>
 
 
-    <!-- ==================== D. THANH TÌM KIẾM & BỘ LỌC THÀNH VIÊN (FILTER TABS) ==================== -->
+    <!-- ==================== THANH TÌM KIẾM & BỘ LỌC THÀNH VIÊN ==================== -->
     <div class="max-w-4xl mx-auto space-y-6">
       
-      <!-- Ô tìm kiếm lớn tìm theo tên, vị trí hoặc kỹ năng (Python, React, Figma, Java...) -->
+      <!-- Ô tìm kiếm lớn tìm theo tên, vị trí hoặc kỹ năng -->
       <div class="relative group">
         <div class="absolute inset-y-0 left-0 pl-4 sm:pl-5 flex items-center pointer-events-none text-slate-400 group-focus-within:text-[#4F46E5] transition-colors">
           <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -181,7 +182,7 @@
         <button 
           id="clear-search-btn"
           type="button"
-          class="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-[#0F172A] dark:hover:text-white"
+          class="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-[#0F172A] dark:hover:text-white cursor-pointer"
           style="display: none;"
           title="Xóa tìm kiếm"
         >
@@ -191,12 +192,10 @@
         </button>
       </div>
 
-      <!-- Các tab lọc bộ môn/chuyên môn hình viên thuốc (Pill Tabs) -->
+      <!-- Các tab lọc chuyên môn (Pill Tabs) -->
       <div class="overflow-x-auto pb-2 scrollbar-none">
         <div id="category-tabs-container" class="flex items-center gap-2 sm:gap-2.5 justify-start sm:justify-center min-w-max px-1">
-          <!-- Rendered dynamically by app.js:
-               Tab active: Nền xanh tím Indigo (#4F46E5), chữ trắng, badge đếm số lượng
-               Tab inactive: Nền xám nhạt (#F1F5F9), chữ xám tối (#64748B) -->
+          <!-- Rendered dynamically by app.js -->
         </div>
       </div>
 
@@ -212,7 +211,7 @@
             <span class="text-slate-400 hidden sm:inline">Sắp xếp:</span>
             <select 
               id="sort-select"
-              class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-1.5 text-xs sm:text-sm text-[#0F172A] dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4F46E5]"
+              class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-1.5 text-xs sm:text-sm text-[#0F172A] dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4F46E5] cursor-pointer"
             >
               <option value="default">Mặc định (Khuyên dùng)</option>
               <option value="name-asc">Tên (A &rarr; Z)</option>
@@ -226,7 +225,7 @@
             <button 
               id="view-grid-btn"
               type="button"
-              class="p-1.5 rounded-lg bg-[#4F46E5] text-white transition-colors"
+              class="p-1.5 rounded-lg bg-[#4F46E5] text-white transition-colors cursor-pointer"
               title="Xem dạng lưới Card"
               aria-label="Xem dạng lưới Card"
             >
@@ -237,7 +236,7 @@
             <button 
               id="view-list-btn"
               type="button"
-              class="p-1.5 rounded-lg text-[#64748B] dark:text-slate-400 hover:text-[#0F172A] dark:hover:text-slate-200 transition-colors"
+              class="p-1.5 rounded-lg text-slate-500 dark:text-slate-400 hover:text-[#0F172A] dark:hover:text-slate-200 transition-colors cursor-pointer"
               title="Xem dạng danh sách rút gọn"
               aria-label="Xem dạng danh sách rút gọn"
             >
@@ -253,21 +252,21 @@
   </section>
 
 
-  <!-- ==================== E. DANH SÁCH THÀNH VIÊN & DỰ ÁN (GRID LAYOUT) ==================== -->
+  <!-- ==================== 3. DANH SÁCH THÀNH VIÊN (GRID LAYOUT) ==================== -->
   <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full">
     <div id="members-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-      <!-- Member Cards Rendered Here by app.js -->
+      <!-- Member Cards Rendered Dynamically Here by app.js -->
     </div>
   </main>
 
 
-  <!-- ==================== FOOTER ==================== -->
+  <!-- ==================== 4. FOOTER ==================== -->
   <footer class="bg-white/80 dark:bg-slate-900/80 border-t border-slate-200/80 dark:border-slate-800 mt-16 py-8 transition-colors">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left text-xs sm:text-sm text-[#64748B] dark:text-slate-400">
       <div class="flex items-center gap-2 justify-center">
         <span class="w-2.5 h-2.5 rounded-full bg-[#4F46E5]"></span>
         <span class="font-bold text-[#0F172A] dark:text-slate-200">PORTFOLIO NHÓM 1</span>
-        <span>&bull; Khoa CNTT &bull; UTH</span>
+        <span>&bull; Khoa CNTT &bull; Trường Đại học Giao thông Vận tải TP.HCM (UTH)</span>
       </div>
       <p>
         Bảo toàn 100% cấu trúc &amp; mã nguồn của từng Portfolio thành viên.
@@ -281,7 +280,7 @@
   </footer>
 
 
-  <!-- ==================== VIEW ENGINE: FULLSCREEN MODAL / DEVICE SWITCHER ==================== -->
+  <!-- ==================== 5. VIEW ENGINE: FULLSCREEN MODAL / DEVICE SWITCHER ==================== -->
   <div 
     id="portfolio-viewer-modal" 
     class="fixed inset-0 z-50 hidden flex-col bg-slate-950/95 backdrop-blur-md"
@@ -297,7 +296,7 @@
         <button 
           onclick="closeViewer()"
           type="button"
-          class="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-[#4F46E5] to-[#7C3AED] hover:opacity-90 text-white font-bold text-xs sm:text-sm shadow-md shadow-indigo-600/30 transition-all flex-shrink-0 group"
+          class="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-[#4F46E5] to-[#7C3AED] hover:opacity-90 text-white font-bold text-xs sm:text-sm shadow-md shadow-indigo-600/30 transition-all flex-shrink-0 group cursor-pointer"
           title="Quay lại danh sách Nhóm 1 (Esc)"
         >
           <svg class="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -332,7 +331,7 @@
           type="button" 
           onclick="setDeviceMode('desktop')"
           data-device-btn="desktop"
-          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#4F46E5] text-white transition-all font-semibold"
+          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#4F46E5] text-white transition-all font-semibold cursor-pointer"
           title="Xem chế độ Desktop (Phím 1)"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -345,7 +344,7 @@
           type="button" 
           onclick="setDeviceMode('tablet')"
           data-device-btn="tablet"
-          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-slate-400 hover:bg-slate-700 transition-all font-semibold"
+          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-slate-400 hover:bg-slate-700 transition-all font-semibold cursor-pointer"
           title="Xem chế độ Tablet 768px (Phím 2)"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -358,7 +357,7 @@
           type="button" 
           onclick="setDeviceMode('mobile')"
           data-device-btn="mobile"
-          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-slate-400 hover:bg-slate-700 transition-all font-semibold"
+          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-slate-400 hover:bg-slate-700 transition-all font-semibold cursor-pointer"
           title="Xem chế độ Mobile 390px (Phím 3)"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -374,7 +373,7 @@
         <button 
           type="button"
           onclick="navigateViewer(-1)"
-          class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors"
+          class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer"
           title="Thành viên trước (&larr;)"
           aria-label="Thành viên trước"
         >
@@ -387,7 +386,7 @@
         <button 
           type="button"
           onclick="navigateViewer(1)"
-          class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors"
+          class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer"
           title="Thành viên tiếp theo (&rarr;)"
           aria-label="Thành viên tiếp theo"
         >
@@ -402,7 +401,7 @@
           href="#" 
           target="_blank" 
           rel="noopener noreferrer"
-          class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors"
+          class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer"
           title="Mở toàn màn hình trong tab mới"
           aria-label="Mở toàn màn hình trong tab mới"
         >
@@ -415,7 +414,7 @@
         <button 
           type="button"
           onclick="closeViewer()"
-          class="p-2 rounded-xl bg-slate-800 hover:bg-red-900/80 hover:text-red-300 text-slate-300 transition-colors"
+          class="p-2 rounded-xl bg-slate-800 hover:bg-red-900/80 hover:text-red-300 text-slate-300 transition-colors cursor-pointer"
           title="Đóng (Esc)"
           aria-label="Đóng xem trước"
         >
