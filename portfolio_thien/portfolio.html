@@ -9,1151 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   
-  <style id="mainStylesheet">
-    /* ==========================================================================
-       1. BIẾN MÀU SẮC & CÀI ĐẶT CƠ BẢN (CHUẨN MẪU TUTS+ VCARD / RYAN-CV)
-       ========================================================================== */
-    :root {
-      --bg-outer: #eef2f6;
-      --bg-sheet: #ffffff;
-      --bg-subtle: #f8fafc;
-      --text-main: #1e293b;
-      --text-muted: #64748b;
-      --primary: #0f766e;         /* Xanh Teal đậm sang trọng kiểu Tuts+ vCard */
-      --primary-light: #ccfbf1;
-      --primary-hover: #115e59;
-      --accent: #0284c7;
-      --border: #e2e8f0;
-      --danger: #dc2626;
-      --success: #16a34a;
-      --shadow-card: 0 10px 30px -5px rgba(15, 23, 42, 0.06);
-      --radius-lg: 18px;
-      --radius-md: 12px;
-      --transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    [data-theme="dark"] {
-      --bg-outer: #0b1120;
-      --bg-sheet: #151f32;
-      --bg-subtle: #1e293b;
-      --text-main: #f1f5f9;
-      --text-muted: #94a3b8;
-      --primary: #14b8a6;
-      --primary-light: rgba(20, 184, 166, 0.15);
-      --primary-hover: #2dd4bf;
-      --accent: #38bdf8;
-      --border: #283548;
-      --shadow-card: 0 12px 32px -5px rgba(0, 0, 0, 0.45);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 84px;
-    }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: var(--bg-outer);
-      background-image: radial-gradient(var(--border) 1px, transparent 1px);
-      background-size: 24px 24px;
-      color: var(--text-main);
-      line-height: 1.65;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    h1, h2, h3, h4 {
-      font-family: 'Poppins', sans-serif;
-      color: var(--text-main);
-      line-height: 1.3;
-    }
-
-    a {
-      color: var(--primary);
-      text-decoration: none;
-      transition: var(--transition);
-    }
-
-    ul {
-      list-style: none;
-    }
-
-    /* ==========================================================================
-       2. HEADER / NAVBAR DÍNH Ở TRÊN CÙNG (TIÊU CHÍ 1)
-       ========================================================================== */
-    .top-header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      transition: var(--transition);
-    }
-
-    [data-theme="dark"] .top-header {
-      background: rgba(21, 31, 50, 0.9);
-    }
-
-    .nav-container {
-      max-width: 1320px;
-      margin: 0 auto;
-      padding: 0 20px;
-      height: 68px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .brand-logo {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 800;
-      font-size: 1.25rem;
-      color: var(--text-main);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .brand-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--primary);
-      display: inline-block;
-    }
-
-    .nav-menu {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .nav-link {
-      padding: 7px 12px;
-      border-radius: 8px;
-      font-size: 0.88rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      transition: var(--transition);
-    }
-
-    .nav-link:hover,
-    .nav-link.active {
-      color: var(--primary);
-      background: var(--primary-light);
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .icon-btn {
-      padding: 8px 12px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: var(--bg-sheet);
-      color: var(--text-main);
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: var(--transition);
-    }
-
-    .icon-btn:hover {
-      border-color: var(--primary);
-      color: var(--primary);
-      transform: translateY(-1px);
-    }
-
-    .mobile-toggle {
-      display: none;
-      font-size: 1.25rem;
-      padding: 6px 10px;
-    }
-
-    /* ==========================================================================
-       3. BỐ CỤC CHIA 2 CỘT CHUẨN TUTS+ VCARD RESUME (SIDEBAR + MAIN SHEET)
-       ========================================================================== */
-    .resume-wrapper {
-      max-width: 1320px;
-      margin: 28px auto 60px;
-      padding: 0 20px;
-      display: grid;
-      grid-template-columns: 350px 1fr;
-      gap: 28px;
-      align-items: start;
-    }
-
-    /* --- CỘT TRÁI: VCARD PROFILE CỐ ĐỊNH --- */
-    .vcard-sidebar {
-      position: sticky;
-      top: 92px;
-      background: var(--bg-sheet);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow-card);
-      transition: var(--transition);
-    }
-
-    .vcard-cover {
-      height: 115px;
-      background: linear-gradient(135deg, #0f766e 0%, #0369a1 100%);
-      position: relative;
-    }
-
-    .vcard-avatar-wrap {
-      width: 124px;
-      height: 124px;
-      margin: -62px auto 12px;
-      position: relative;
-      border-radius: 50%;
-      border: 5px solid var(--bg-sheet);
-      background: var(--bg-subtle);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-      overflow: hidden;
-    }
-
-    .vcard-avatar-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .change-photo-label {
-      display: inline-block;
-      margin-top: 4px;
-      font-size: 0.76rem;
-      font-weight: 600;
-      color: var(--primary);
-      background: var(--primary-light);
-      padding: 4px 10px;
-      border-radius: 99px;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .change-photo-label:hover {
-      opacity: 0.85;
-    }
-
-    .vcard-body {
-      padding: 0 24px 24px;
-      text-align: center;
-    }
-
-    .vcard-name {
-      font-size: 1.45rem;
-      font-weight: 700;
-      margin-top: 8px;
-    }
-
-    .vcard-role {
-      font-size: 0.88rem;
-      font-weight: 600;
-      color: var(--primary);
-      margin: 4px 0 14px;
-      min-height: 22px;
-    }
-
-    .vcard-socials {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-bottom: 18px;
-    }
-
-    .social-pill {
-      padding: 6px 12px;
-      border-radius: 8px;
-      background: var(--bg-subtle);
-      border: 1px solid var(--border);
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--text-main);
-    }
-
-    .social-pill:hover {
-      border-color: var(--primary);
-      color: var(--primary);
-    }
-
-    /* Danh sách thông tin cá nhân kiểu vCard Tuts+ */
-    .vcard-info-list {
-      text-align: left;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 14px 0;
-      margin-bottom: 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .vcard-info-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.85rem;
-      gap: 8px;
-    }
-
-    .info-label {
-      background: var(--primary-light);
-      color: var(--primary);
-      font-weight: 600;
-      padding: 2px 8px;
-      border-radius: 6px;
-      font-size: 0.76rem;
-      white-space: nowrap;
-    }
-
-    .info-val {
-      color: var(--text-main);
-      font-weight: 500;
-      text-align: right;
-    }
-
-    .vcard-cta-group {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .btn-primary, .btn-outline {
-      padding: 10px 14px;
-      border-radius: 10px;
-      font-weight: 600;
-      font-size: 0.86rem;
-      cursor: pointer;
-      text-align: center;
-      border: none;
-      transition: var(--transition);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
-
-    .btn-primary {
-      background: var(--primary);
-      color: #ffffff;
-    }
-
-    .btn-primary:hover {
-      background: var(--primary-hover);
-      color: #ffffff;
-      transform: translateY(-2px);
-    }
-
-    .btn-outline {
-      background: var(--bg-subtle);
-      color: var(--text-main);
-      border: 1px solid var(--border);
-    }
-
-    .btn-outline:hover {
-      border-color: var(--primary);
-      color: var(--primary);
-      transform: translateY(-2px);
-    }
-
-    /* --- CỘT PHẢI: CÁC TỜ NỘI DUNG RESUME --- */
-    .resume-main {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    .resume-section {
-      background: var(--bg-sheet);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 32px;
-      box-shadow: var(--shadow-card);
-      transition: var(--transition);
-    }
-
-    /* Tiêu đề từng phần kiểu Tuts+ Resume (Có chấm tròn trang trí & đường gạch chân mảnh) */
-    .section-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-      padding-bottom: 16px;
-      margin-bottom: 24px;
-      border-bottom: 1px solid var(--border);
-      position: relative;
-    }
-
-    .section-header::after {
-      content: "";
-      position: absolute;
-      bottom: -1px;
-      left: 0;
-      width: 64px;
-      height: 3px;
-      background: var(--primary);
-      border-radius: 99px;
-    }
-
-    .section-title {
-      font-size: 1.35rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .title-badge {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      background: var(--primary-light);
-      color: var(--primary);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.95rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 700;
-    }
-
-    .section-sub {
-      font-size: 0.84rem;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
-    /* ==========================================================================
-       4. HERO BANNER NỔI BẬT ĐẦU TRANG (TIÊU CHÍ 1)
-       ========================================================================== */
-    .hero-banner {
-      background: linear-gradient(135deg, rgba(15, 118, 110, 0.08) 0%, rgba(2, 132, 199, 0.08) 100%);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 34px 32px;
-      display: grid;
-      grid-template-columns: 1.35fr 0.65fr;
-      gap: 24px;
-      align-items: center;
-    }
-
-    .hero-greeting {
-      display: inline-block;
-      padding: 4px 12px;
-      border-radius: 99px;
-      background: var(--primary-light);
-      color: var(--primary);
-      font-weight: 700;
-      font-size: 0.78rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-
-    .hero-title {
-      font-size: 2rem;
-      margin-bottom: 10px;
-    }
-
-    .hero-title span {
-      color: var(--primary);
-    }
-
-    .hero-desc {
-      color: var(--text-muted);
-      font-size: 0.96rem;
-      margin-bottom: 20px;
-    }
-
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-
-    .stat-box {
-      background: var(--bg-sheet);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 14px;
-      text-align: center;
-    }
-
-    .stat-num {
-      font-family: 'Poppins', sans-serif;
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--primary);
-    }
-
-    .stat-label {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-
-    /* ==========================================================================
-       5. GIỚI THIỆU BẢN THÂN & MỤC TIÊU NGHỀ NGHIỆP (TIÊU CHÍ 2 & 3)
-       ========================================================================== */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 24px;
-    }
-
-    .about-text p {
-      margin-bottom: 12px;
-      color: var(--text-main);
-      font-size: 0.95rem;
-    }
-
-    .service-mini-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
-
-    .service-card {
-      background: var(--bg-subtle);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 14px 16px;
-      transition: var(--transition);
-    }
-
-    .service-card:hover {
-      border-color: var(--primary);
-      transform: translateX(4px);
-    }
-
-    .service-card h4 {
-      font-size: 0.95rem;
-      margin-bottom: 4px;
-      color: var(--primary);
-    }
-
-    .service-card p {
-      font-size: 0.84rem;
-      color: var(--text-muted);
-    }
-
-    /* Lộ trình Mục tiêu Nghề nghiệp 3 giai đoạn */
-    .goals-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .goal-card {
-      background: var(--bg-subtle);
-      border: 1px solid var(--border);
-      border-top: 4px solid var(--primary);
-      border-radius: var(--radius-md);
-      padding: 20px;
-      transition: var(--transition);
-    }
-
-    .goal-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-card);
-    }
-
-    .goal-stage {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.76rem;
-      font-weight: 700;
-      color: var(--primary);
-      text-transform: uppercase;
-    }
-
-    .goal-card h3 {
-      font-size: 1.05rem;
-      margin: 6px 0 10px;
-    }
-
-    .goal-card p {
-      font-size: 0.87rem;
-      color: var(--text-muted);
-    }
-
-    /* ==========================================================================
-       6. KỸ NĂNG CHUYÊN MÔN KIỂU TUTS+ RESUME (TIÊU CHÍ 4)
-       ========================================================================== */
-    .skills-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 28px;
-    }
-
-    .skill-group-title {
-      font-size: 0.98rem;
-      margin-bottom: 16px;
-      color: var(--text-main);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .skill-bar-item {
-      margin-bottom: 15px;
-    }
-
-    .skill-bar-top {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.86rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .skill-track {
-      height: 8px;
-      background: var(--bg-subtle);
-      border: 1px solid var(--border);
-      border-radius: 99px;
-      overflow: hidden;
-    }
-
-    .skill-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      border-radius: 99px;
-      transition: width 0.8s ease;
-    }
-
-    .tech-tags-wrap {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 14px;
-    }
-
-    .tech-tag {
-      padding: 6px 12px;
-      border-radius: 8px;
-      background: var(--bg-subtle);
-      border: 1px solid var(--border);
-      font-size: 0.82rem;
-      font-weight: 600;
-      font-family: 'JetBrains Mono', monospace;
-      transition: var(--transition);
-    }
-
-    .tech-tag:hover {
-      border-color: var(--primary);
-      color: var(--primary);
-      background: var(--primary-light);
-    }
-
-    /* ==========================================================================
-       7. TIMELINE HỌC VẤN / KINH NGHIỆM / HOẠT ĐỘNG + TABS (TIÊU CHÍ 5 & 14)
-       ========================================================================== */
-    .resume-tabs {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 22px;
-    }
-
-    .tab-btn {
-      padding: 8px 16px;
-      border-radius: 9px;
-      border: 1px solid var(--border);
-      background: var(--bg-subtle);
-      color: var(--text-muted);
-      font-weight: 600;
-      font-size: 0.86rem;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .tab-btn.active,
-    .tab-btn:hover {
-      background: var(--primary);
-      color: #ffffff;
-      border-color: var(--primary);
-    }
-
-    .tab-panel {
-      display: none;
-      animation: fadeIn 0.3s ease;
-    }
-
-    .tab-panel.active {
-      display: block;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Dòng thời gian (Vertical Resume Timeline) chuẩn Tuts+ */
-    .timeline-list {
-      position: relative;
-      padding-left: 26px;
-      border-left: 2px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      gap: 22px;
-    }
-
-    .timeline-item {
-      position: relative;
-      background: var(--bg-subtle);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 18px 20px;
-      transition: var(--transition);
-    }
-
-    .timeline-item:hover {
-      border-color: var(--primary);
-    }
-
-    .timeline-item::before {
-      content: "";
-      position: absolute;
-      left: -33px;
-      top: 22px;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--bg-sheet);
-      border: 3px solid var(--primary);
-    }
-
-    .timeline-date {
-      display: inline-block;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.76rem;
-      font-weight: 600;
-      color: var(--primary);
-      background: var(--primary-light);
-      padding: 2px 9px;
-      border-radius: 6px;
-      margin-bottom: 6px;
-    }
-
-    .timeline-title {
-      font-size: 1.02rem;
-      margin-bottom: 2px;
-    }
-
-    .timeline-place {
-      font-size: 0.84rem;
-      color: var(--text-muted);
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-
-    .timeline-desc {
-      font-size: 0.88rem;
-      color: var(--text-main);
-    }
-
-    /* ==========================================================================
-       8. DỰ ÁN CÁ NHÂN + FILTER + MODAL SLIDESHOW (TIÊU CHÍ 6 & 14)
-       ========================================================================== */
-    .filter-bar {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
-
-    .filter-btn {
-      padding: 6px 14px;
-      border-radius: 99px;
-      border: 1px solid var(--border);
-      background: var(--bg-subtle);
-      color: var(--text-muted);
-      font-size: 0.83rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .filter-btn.active,
-    .filter-btn:hover {
-      background: var(--primary);
-      color: #ffffff;
-      border-color: var(--primary);
-    }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
-
-    .project-card {
-      background: var(--bg-subtle);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: var(--transition);
-    }
-
-    .project-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--primary);
-      box-shadow: var(--shadow-card);
-    }
-
-    .project-thumb {
-      height: 165px;
-      position: relative;
-      overflow: hidden;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .project-thumb svg {
-      width: 100%;
-      height: 100%;
-      display: block;
-      transition: transform 0.4s ease;
-    }
-
-    .project-card:hover .project-thumb svg {
-      transform: scale(1.04);
-    }
-
-    .project-body {
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-
-    .project-cat {
-      font-size: 0.74rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: var(--primary);
-      letter-spacing: 0.04em;
-    }
-
-    .project-title {
-      font-size: 1.05rem;
-      margin: 4px 0 8px;
-    }
-
-    .project-desc {
-      font-size: 0.86rem;
-      color: var(--text-muted);
-      margin-bottom: 14px;
-      flex: 1;
-    }
-
-    .project-stack {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 16px;
-    }
-
-    .stack-pill {
-      font-size: 0.73rem;
-      font-family: 'JetBrains Mono', monospace;
-      padding: 3px 8px;
-      border-radius: 6px;
-      background: var(--bg-sheet);
-      border: 1px solid var(--border);
-      color: var(--text-main);
-    }
-
-    .project-links {
-      display: flex;
-      gap: 8px;
-      border-top: 1px solid var(--border);
-      padding-top: 12px;
-    }
-
-    /* ==========================================================================
-       9. TÍNH NĂNG SÁNG TẠO: CÔNG CỤ TÍNH CƯỚC DIM WEIGHT LOGISTICS (TIÊU CHÍ 19)
-       ========================================================================== */
-    .calc-box {
-      margin-top: 24px;
-      background: linear-gradient(135deg, rgba(15, 118, 110, 0.06), rgba(2, 132, 199, 0.06));
-      border: 1px dashed var(--primary);
-      border-radius: var(--radius-md);
-      padding: 20px;
-    }
-
-    .calc-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr) auto;
-      gap: 10px;
-      margin-top: 12px;
-      align-items: end;
-    }
-
-    .calc-field label {
-      display: block;
-      font-size: 0.76rem;
-      font-weight: 600;
-      margin-bottom: 4px;
-      color: var(--text-muted);
-    }
-
-    .calc-field input {
-      width: 100%;
-      padding: 8px 10px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: var(--bg-sheet);
-      color: var(--text-main);
-      font-size: 0.86rem;
-    }
-
-    .calc-result {
-      margin-top: 12px;
-      font-size: 0.88rem;
-      font-weight: 600;
-      color: var(--primary);
-    }
-
-    /* ==========================================================================
-       10. CHỨNG CHỈ / GIẢI THƯỞNG / SỞ THÍCH (TIÊU CHÍ 7)
-       ========================================================================== */
-    .extra-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 22px;
-    }
-
-    .extra-card {
-      background: var(--bg-subtle);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 20px;
-    }
-
-    .extra-card h3 {
-      font-size: 1rem;
-      margin-bottom: 14px;
-      color: var(--primary);
-    }
-
-    .check-list li {
-      position: relative;
-      padding-left: 22px;
-      margin-bottom: 10px;
-      font-size: 0.88rem;
-    }
-
-    .check-list li::before {
-      content: "✓";
-      position: absolute;
-      left: 0;
-      top: 0;
-      color: var(--primary);
-      font-weight: 700;
-    }
-
-    /* ==========================================================================
-       11. FORM LIÊN HỆ + KIỂM TRA DỮ LIỆU JAVASCRIPT (TIÊU CHÍ 15)
-       ========================================================================== */
-    .contact-form {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-
-    .form-group.full {
-      grid-column: 1 / -1;
-    }
-
-    .form-group label {
-      font-size: 0.84rem;
-      font-weight: 600;
-    }
-
-    .form-control {
-      padding: 11px 14px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: var(--bg-subtle);
-      color: var(--text-main);
-      font-family: inherit;
-      font-size: 0.9rem;
-      transition: var(--transition);
-    }
-
-    .form-control:focus {
-      outline: none;
-      border-color: var(--primary);
-      background: var(--bg-sheet);
-    }
-
-    .form-control.invalid {
-      border-color: var(--danger);
-    }
-
-    .error-msg {
-      font-size: 0.78rem;
-      color: var(--danger);
-      min-height: 18px;
-    }
-
-    .form-status {
-      grid-column: 1 / -1;
-      padding: 12px 16px;
-      border-radius: 10px;
-      font-size: 0.88rem;
-      font-weight: 600;
-      display: none;
-    }
-
-    .form-status.success {
-      display: block;
-      background: rgba(22, 163, 74, 0.12);
-      color: var(--success);
-      border: 1px solid var(--success);
-    }
-
-    /* ==========================================================================
-       12. MODAL CHI TIẾT DỰ ÁN & NÚT SCROLL-TO-TOP
-       ========================================================================== */
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(15, 23, 42, 0.65);
-      backdrop-filter: blur(4px);
-      z-index: 2000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .modal-backdrop.open {
-      display: flex;
-    }
-
-    .modal-card {
-      background: var(--bg-sheet);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      max-width: 650px;
-      width: 100%;
-      padding: 26px;
-      box-shadow: var(--shadow-card);
-    }
-
-    .modal-slide-box {
-      background: var(--bg-subtle);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 18px;
-      margin: 14px 0;
-      text-align: center;
-    }
-
-    .scroll-top-btn {
-      position: fixed;
-      right: 22px;
-      bottom: 22px;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: var(--primary);
-      color: #ffffff;
-      border: none;
-      font-size: 1.1rem;
-      cursor: pointer;
-      box-shadow: var(--shadow-card);
-      opacity: 0;
-      pointer-events: none;
-      transition: var(--transition);
-      z-index: 900;
-    }
-
-    .scroll-top-btn.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .resume-footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-
-    /* ==========================================================================
-       13. RESPONSIVE CHO TABLET & MOBILE (TIÊU CHÍ 11)
-       ========================================================================== */
-    @media (max-width: 1024px) {
-      .resume-wrapper {
-        grid-template-columns: 1fr;
-      }
-      .vcard-sidebar {
-        position: static;
-      }
-      .hero-banner,
-      .about-grid,
-      .goals-grid,
-      .skills-layout,
-      .projects-grid,
-      .extra-grid {
-        grid-template-columns: 1fr;
-      }
-      .calc-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .mobile-toggle {
-        display: inline-flex;
-      }
-      .nav-menu {
-        position: fixed;
-        top: 68px;
-        left: 0;
-        right: 0;
-        background: var(--bg-sheet);
-        border-bottom: 1px solid var(--border);
-        flex-direction: column;
-        padding: 16px;
-        display: none;
-      }
-      .nav-menu.open {
-        display: flex;
-      }
-      .contact-form {
-        grid-template-columns: 1fr;
-      }
-      .resume-section {
-        padding: 22px 18px;
-      }
-    }
-  </style>
+  <!-- Liên kết trực tiếp tới file style.css mới của Thiên -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
@@ -1170,19 +27,19 @@
         <a href="#about" class="nav-link">Giới thiệu</a>
         <a href="#goals" class="nav-link">Mục tiêu</a>
         <a href="#skills" class="nav-link">Kỹ năng</a>
-        <a href="#resume" class="nav-link">Học vấn & KN</a>
+        <a href="#resume" class="nav-link">Học vấn &amp; KN</a>
         <a href="#projects" class="nav-link">Dự án</a>
-        <a href="#extra" class="nav-link">Chứng chỉ & Sở thích</a>
+        <a href="#extra" class="nav-link">Chứng chỉ &amp; Sở thích</a>
         <a href="#contact" class="nav-link">Liên hệ</a>
       </nav>
 
       <div class="nav-actions">
+        <a href="../index.html" class="icon-btn" title="Quay về Trang chủ Hub Nhóm 1">
+          🏠 Hub Nhóm 1
+        </a>
         <button class="icon-btn" id="themeToggle" type="button" title="Đổi giao diện Sáng / Tối">
           <span id="themeIcon">🌙</span>
           <span id="themeText">Tối</span>
-        </button>
-        <button class="icon-btn" id="exportCodeBtn" type="button" title="Tải 3 file HTML, CSS, JS tách rời">
-          📁 Tải 3 File Nộp Bài
         </button>
         <button class="icon-btn mobile-toggle" id="mobileMenuBtn" type="button" aria-label="Mở menu">
           ☰
@@ -1200,14 +57,20 @@
 
       <div class="vcard-body">
         <figure class="vcard-avatar-wrap">
-          <img id="avatarPreview" alt="Ảnh đại diện Đinh Thanh Thiên" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='%230f766e'/><stop offset='100%' stop-color='%230284c7'/></linearGradient></defs><rect width='200' height='200' fill='url(%23g)'/><circle cx='100' cy='76' r='36' fill='%23ffffff' fill-opacity='0.92'/><path d='M38 182c10-38 38-56 62-56s52 18 62 56' fill='%23ffffff' fill-opacity='0.92'/></svg>" />
+          <!-- Đã trỏ trực tiếp sang file ảnh thiên.jpg -->
+          <img 
+            id="avatarPreview" 
+            src="ảnh thiên.jpg" 
+            alt="Ảnh đại diện Đinh Thanh Thiên"
+            onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Dinh+Thanh+Thien&background=0f766e&color=fff&size=256';" 
+          />
         </figure>
 
         <label class="change-photo-label" for="avatarInput">📷 Đổi ảnh thẻ cá nhân</label>
         <input type="file" id="avatarInput" accept="image/*" hidden />
 
         <h1 class="vcard-name">Đinh Thanh Thiên</h1>
-        <p class="vcard-role" id="typewriterRole">Sinh viên CNTT & Smart Logistics</p>
+        <p class="vcard-role" id="typewriterRole">Sinh viên CNTT &amp; Smart Logistics</p>
 
         <div class="vcard-socials">
           <a href="https://github.com/dinhthanhthien10-bit" target="_blank" rel="noopener" class="social-pill">GitHub</a>
@@ -1226,7 +89,7 @@
           </li>
           <li class="vcard-info-item">
             <span class="info-label">Chuyên ngành</span>
-            <span class="info-val">CNTT & Smart Logistics</span>
+            <span class="info-val">CNTT &amp; Smart Logistics</span>
           </li>
           <li class="vcard-info-item">
             <span class="info-label">Địa chỉ</span>
@@ -1254,7 +117,7 @@
           <span class="hero-greeting">Hồ sơ năng lực cá nhân • vCard Resume</span>
           <h2 class="hero-title">Xin chào, mình là <span>Đinh Thanh Thiên</span></h2>
           <p class="hero-desc">
-            Sinh viên ngành <strong>Công nghệ Thông tin & Smart Logistics</strong> tại Trường Đại học Giao thông Vận tải TP.HCM (UTH). Mình tập trung phát triển hệ thống <strong>Backend Python (FastAPI / Flask)</strong>, cơ sở dữ liệu SQL và ứng dụng <strong>Machine Learning</strong> vào bài toán tối ưu cước phí, định tuyến giao nhận thực tế.
+            Sinh viên ngành <strong>Công nghệ Thông tin &amp; Smart Logistics</strong> tại Trường Đại học Giao thông Vận tải TP.HCM (UTH). Mình tập trung phát triển hệ thống <strong>Backend Python (FastAPI / Flask)</strong>, cơ sở dữ liệu SQL và ứng dụng <strong>Machine Learning</strong> vào bài toán tối ưu cước phí, định tuyến giao nhận thực tế.
           </p>
           <div style="display:flex; gap:10px; flex-wrap:wrap;">
             <a href="#projects" class="btn-primary">Xem Dự Án Thực Tế</a>
@@ -1265,7 +128,7 @@
         <div class="hero-stats">
           <div class="stat-box">
             <div class="stat-num">04+</div>
-            <div class="stat-label">Đồ án & Dự án IT</div>
+            <div class="stat-label">Đồ án &amp; Dự án IT</div>
           </div>
           <div class="stat-box">
             <div class="stat-num">94.6%</div>
@@ -1277,7 +140,7 @@
           </div>
           <div class="stat-box">
             <div class="stat-num">UTH</div>
-            <div class="stat-label">CNTT & Logistics</div>
+            <div class="stat-label">CNTT &amp; Logistics</div>
           </div>
         </div>
       </section>
@@ -1286,7 +149,7 @@
       <section class="resume-section" id="about">
         <div class="section-header">
           <h2 class="section-title"><span class="title-badge">01</span> Giới thiệu bản thân</h2>
-          <span class="section-sub">Thông tin cá nhân & Định hướng chuyên môn</span>
+          <span class="section-sub">Thông tin cá nhân &amp; Định hướng chuyên môn</span>
         </div>
 
         <div class="about-grid">
@@ -1301,7 +164,7 @@
 
           <div class="service-mini-grid">
             <div class="service-card">
-              <h4>⚙️ Phát triển Backend & REST API</h4>
+              <h4>⚙️ Phát triển Backend &amp; REST API</h4>
               <p>Xây dựng API với Python (FastAPI, Flask), thiết kế CSDL chuẩn hóa và viết tài liệu OpenAPI.</p>
             </div>
             <div class="service-card">
@@ -1326,7 +189,7 @@
         <div class="goals-grid">
           <article class="goal-card">
             <span class="goal-stage">Ngắn hạn (2026 – 2027)</span>
-            <h3>Hoàn thiện nền tảng & Thực tập</h3>
+            <h3>Hoàn thiện nền tảng &amp; Thực tập</h3>
             <p>
               Hoàn thành tốt các học phần chuyên ngành tại UTH; nắm chắc Python Backend (FastAPI/Flask), cấu trúc dữ liệu, SQL và tiếng Anh giao tiếp kỹ thuật để ứng tuyển vị trí <strong>Backend / Data Intern</strong>.
             </p>
@@ -1334,7 +197,7 @@
 
           <article class="goal-card">
             <span class="goal-stage">Trung hạn (2027 – 2029)</span>
-            <h3>Kỹ sư Backend & Dữ liệu Logistics</h3>
+            <h3>Kỹ sư Backend &amp; Dữ liệu Logistics</h3>
             <p>
               Trở thành <strong>Junior Backend / Applied AI Engineer</strong> tham gia phát triển các hệ thống quản lý vận tải (TMS), kho bãi (WMS) và API điều phối đơn hàng quy mô lớn.
             </p>
@@ -1354,12 +217,12 @@
       <section class="resume-section" id="skills">
         <div class="section-header">
           <h2 class="section-title"><span class="title-badge">03</span> Kỹ năng chuyên môn</h2>
-          <span class="section-sub">Ngôn ngữ lập trình, Framework & Công cụ làm việc</span>
+          <span class="section-sub">Ngôn ngữ lập trình, Framework &amp; Công cụ làm việc</span>
         </div>
 
         <div class="skills-layout">
           <div>
-            <h3 class="skill-group-title">💻 Ngôn ngữ Lập trình & Phát triển Web</h3>
+            <h3 class="skill-group-title">💻 Ngôn ngữ Lập trình &amp; Phát triển Web</h3>
             <div class="skill-bar-item">
               <div class="skill-bar-top"><span>Python (FastAPI, Flask, OOP)</span><span>85%</span></div>
               <div class="skill-track"><div class="skill-fill" style="width: 85%"></div></div>
@@ -1379,17 +242,17 @@
           </div>
 
           <div>
-            <h3 class="skill-group-title">🚀 AI, Dữ liệu & Công cụ Kỹ thuật</h3>
+            <h3 class="skill-group-title">🚀 AI, Dữ liệu &amp; Công cụ Kỹ thuật</h3>
             <div class="skill-bar-item">
-              <div class="skill-bar-top"><span>PyTorch & Machine Learning (CNN, DistilBERT)</span><span>75%</span></div>
+              <div class="skill-bar-top"><span>PyTorch &amp; Machine Learning (CNN, DistilBERT)</span><span>75%</span></div>
               <div class="skill-track"><div class="skill-fill" style="width: 75%"></div></div>
             </div>
             <div class="skill-bar-item">
-              <div class="skill-bar-top"><span>Git / GitHub, Docker & Linux (WSL Ubuntu)</span><span>80%</span></div>
+              <div class="skill-bar-top"><span>Git / GitHub, Docker &amp; Linux (WSL Ubuntu)</span><span>80%</span></div>
               <div class="skill-track"><div class="skill-fill" style="width: 80%"></div></div>
             </div>
             <div class="skill-bar-item">
-              <div class="skill-bar-top"><span>Phân tích Hệ thống & C++ Cơ bản</span><span>74%</span></div>
+              <div class="skill-bar-top"><span>Phân tích Hệ thống &amp; C++ Cơ bản</span><span>74%</span></div>
               <div class="skill-track"><div class="skill-fill" style="width: 74%"></div></div>
             </div>
 
@@ -1410,14 +273,14 @@
       <!-- 5. HỌC VẤN / KINH NGHIỆM / HOẠT ĐỘNG (TIÊU CHÍ 5 & 14) -->
       <section class="resume-section" id="resume">
         <div class="section-header">
-          <h2 class="section-title"><span class="title-badge">04</span> Học vấn, Kinh nghiệm & Hoạt động</h2>
+          <h2 class="section-title"><span class="title-badge">04</span> Học vấn, Kinh nghiệm &amp; Hoạt động</h2>
           <span class="section-sub">Chuyển đổi qua lại giữa các mục bằng Tabs tương tác</span>
         </div>
 
         <div class="resume-tabs" role="tablist">
           <button class="tab-btn active" data-tab="tab-edu" type="button">🎓 Học vấn</button>
           <button class="tab-btn" data-tab="tab-exp" type="button">💼 Kinh nghiệm thực tế</button>
-          <button class="tab-btn" data-tab="tab-act" type="button">🏆 Hoạt động & Thành tích</button>
+          <button class="tab-btn" data-tab="tab-act" type="button">🏆 Hoạt động &amp; Thành tích</button>
         </div>
 
         <!-- Tab 1: Học vấn -->
@@ -1425,7 +288,7 @@
           <div class="timeline-list">
             <article class="timeline-item">
               <span class="timeline-date">2024 – Hiện tại</span>
-              <h3 class="timeline-title">Cử nhân Công nghệ Thông tin & Smart Logistics</h3>
+              <h3 class="timeline-title">Cử nhân Công nghệ Thông tin &amp; Smart Logistics</h3>
               <p class="timeline-place">Trường Đại học Giao thông Vận tải TP.HCM (UTH)</p>
               <p class="timeline-desc">
                 Theo học chuyên sâu lập trình Backend, Cơ sở dữ liệu, Mạng máy tính, Trí tuệ nhân tạo và các hệ thống thông tin phục vụ chuỗi cung ứng - vận tải thông minh.
@@ -1447,16 +310,16 @@
           <div class="timeline-list">
             <article class="timeline-item">
               <span class="timeline-date">2025 – 2026</span>
-              <h3 class="timeline-title">Phát triển Đồ án Phần mềm & REST API</h3>
-              <p class="timeline-place">Dự án học thuật & Cá nhân tại UTH</p>
+              <h3 class="timeline-title">Phát triển Đồ án Phần mềm &amp; REST API</h3>
+              <p class="timeline-place">Dự án học thuật &amp; Cá nhân tại UTH</p>
               <p class="timeline-desc">
                 Thiết kế và lập trình nền tảng Web E-commerce (FastAPI, PostgreSQL, RabbitMQ, Docker), ứng dụng dự báo giá vàng bằng Machine Learning và hệ thống API tính cước vận tải B2B.
               </p>
             </article>
             <article class="timeline-item">
               <span class="timeline-date">2026</span>
-              <h3 class="timeline-title">Tài xế Giao nhận Công nghệ Bán thời gian & Nhân viên Trực trạm</h3>
-              <p class="timeline-place">Đối tác Grab & Ways Station (Quận Gò Vấp, TP.HCM)</p>
+              <h3 class="timeline-title">Tài xế Giao nhận Công nghệ Bán thời gian &amp; Nhân viên Trực trạm</h3>
+              <p class="timeline-place">Đối tác Grab &amp; Ways Station (Quận Gò Vấp, TP.HCM)</p>
               <p class="timeline-desc">
                 Rèn luyện tính kỷ luật, kỹ năng giao tiếp khách hàng, xử lý tình huống thực địa và tích lũy góc nhìn thực tế về bài toán tối ưu lộ trình giao nhận trong đô thị.
               </p>
@@ -1469,7 +332,7 @@
           <div class="timeline-list">
             <article class="timeline-item">
               <span class="timeline-date">10/2026</span>
-              <h3 class="timeline-title">Hoàn thành ChainFit Market & Supply Chain Challenge</h3>
+              <h3 class="timeline-title">Hoàn thành ChainFit Market &amp; Supply Chain Challenge</h3>
               <p class="timeline-place">Mô phỏng Quản trị Chuỗi cung ứng</p>
               <p class="timeline-desc">
                 Vượt qua Vòng 2 với tỷ suất lợi nhuận <strong>ROI đạt 8.53%</strong> trong kịch bản đứt gãy nguồn cung và biến động nhu cầu thị trường.
@@ -1478,7 +341,7 @@
             <article class="timeline-item">
               <span class="timeline-date">08/2026 – 09/2026</span>
               <h3 class="timeline-title">Hoàn thành Chuỗi Bài Lab Deep Learning với PyTorch</h3>
-              <p class="timeline-place">Thị giác máy tính & Xử lý ngôn ngữ tự nhiên</p>
+              <p class="timeline-place">Thị giác máy tính &amp; Xử lý ngôn ngữ tự nhiên</p>
               <p class="timeline-desc">
                 Xây dựng mạng CNN phân loại tập dữ liệu FashionMNIST đạt <strong>94.67% test accuracy</strong> và fine-tune mô hình ngôn ngữ DistilBERT trên tập IMDb đạt <strong>84.10% accuracy</strong>.
               </p>
@@ -1496,8 +359,8 @@
 
         <div class="filter-bar">
           <button class="filter-btn active" data-filter="all" type="button">Tất cả (4)</button>
-          <button class="filter-btn" data-filter="backend" type="button">Backend & Logistics</button>
-          <button class="filter-btn" data-filter="ai" type="button">AI & Machine Learning</button>
+          <button class="filter-btn" data-filter="backend" type="button">Backend &amp; Logistics</button>
+          <button class="filter-btn" data-filter="ai" type="button">AI &amp; Machine Learning</button>
         </div>
 
         <div class="projects-grid" id="projectsGrid">
@@ -1514,8 +377,8 @@
               </svg>
             </div>
             <div class="project-body">
-              <span class="project-cat">Backend & Smart Logistics</span>
-              <h3 class="project-title">B2B Smart Logistics Freight & Routing REST API</h3>
+              <span class="project-cat">Backend &amp; Smart Logistics</span>
+              <h3 class="project-title">B2B Smart Logistics Freight &amp; Routing REST API</h3>
               <p class="project-desc">
                 RESTful API tính trọng lượng quy đổi (DIM Weight), phân vùng tính cước vận tải B2B tự động kèm Unit Test và tài liệu chuẩn OpenAPI/Swagger.
               </p>
@@ -1540,12 +403,12 @@
                 <rect x="24" y="24" width="352" height="132" rx="10" fill="#075985" stroke="#7dd3fc" stroke-width="1.5"/>
                 <text x="42" y="58" fill="#e0f2fe" font-family="monospace" font-size="14" font-weight="bold">UTH Fullstack E-Commerce Platform</text>
                 <text x="42" y="86" fill="#bae6fd" font-family="monospace" font-size="12">FastAPI + PostgreSQL + RabbitMQ</text>
-                <text x="42" y="112" fill="#7dd3fc" font-family="monospace" font-size="12">Async Order Queue & Docker Compose</text>
+                <text x="42" y="112" fill="#7dd3fc" font-family="monospace" font-size="12">Async Order Queue &amp; Docker Compose</text>
                 <circle cx="340" cy="120" r="18" fill="#38bdf8"/>
               </svg>
             </div>
             <div class="project-body">
-              <span class="project-cat">Fullstack Web & Microservices</span>
+              <span class="project-cat">Fullstack Web &amp; Microservices</span>
               <h3 class="project-title">Nền tảng Web Thương mại Điện tử UTH</h3>
               <p class="project-desc">
                 Hệ thống thương mại điện tử hoàn chỉnh sử dụng hàng đợi tin nhắn RabbitMQ xử lý đơn hàng bất đồng bộ, SQLAlchemy ORM và đóng gói bằng Docker.
@@ -1575,7 +438,7 @@
               </svg>
             </div>
             <div class="project-body">
-              <span class="project-cat">AI & Data Web App</span>
+              <span class="project-cat">AI &amp; Data Web App</span>
               <h3 class="project-title">Ứng dụng Web Dự báo Giá Vàng (ML Predictor)</h3>
               <p class="project-desc">
                 Thu thập dữ liệu giá vàng thời gian thực qua Yahoo Finance API, lưu trữ SQLite và huấn luyện mô hình học máy dự báo xu hướng ngắn hạn trên giao diện Jinja2.
@@ -1605,8 +468,8 @@
               </svg>
             </div>
             <div class="project-body">
-              <span class="project-cat">Deep Learning & NLP</span>
-              <h3 class="project-title">Phân loại Ảnh CNN & Cảm xúc Văn bản DistilBERT</h3>
+              <span class="project-cat">Deep Learning &amp; NLP</span>
+              <h3 class="project-title">Phân loại Ảnh CNN &amp; Cảm xúc Văn bản DistilBERT</h3>
               <p class="project-desc">
                 Thiết kế kiến trúc mạng tích chập (Custom CNN) đạt 94.67% độ chính xác trên FashionMNIST và tinh chỉnh mô hình ngôn ngữ DistilBERT phân tích bình luận IMDb.
               </p>
@@ -1626,7 +489,7 @@
 
         <!-- TÍNH NĂNG SÁNG TẠO: MINI LOGISTICS DIM WEIGHT CALCULATOR (TIÊU CHÍ 19) -->
         <div class="calc-box">
-          <h4>⚡ Demo Trực Tiếp: Công cụ Tính Trọng lượng Quy đổi & Cước Logistics (DIM Weight)</h4>
+          <h4>⚡ Demo Trực Tiếp: Công cụ Tính Trọng lượng Quy đổi &amp; Cước Logistics (DIM Weight)</h4>
           <p style="font-size:0.83rem; color:var(--text-muted);">
             Mô phỏng trực tiếp công thức tính cước từ dự án <em>Smart Logistics REST API</em> của mình ngay trên hồ sơ:
           </p>
@@ -1658,17 +521,17 @@
       <!-- 7. CHỨNG CHỈ / GIẢI THƯỞNG / SỞ THÍCH (TIÊU CHÍ 7) -->
       <section class="resume-section" id="extra">
         <div class="section-header">
-          <h2 class="section-title"><span class="title-badge">06</span> Chứng chỉ, Giải thưởng & Sở thích</h2>
-          <span class="section-sub">Thông tin bổ trợ & Đời sống cá nhân</span>
+          <h2 class="section-title"><span class="title-badge">06</span> Chứng chỉ, Giải thưởng &amp; Sở thích</h2>
+          <span class="section-sub">Thông tin bổ trợ &amp; Đời sống cá nhân</span>
         </div>
 
         <div class="extra-grid">
           <div class="extra-card">
-            <h3>🏅 Chứng chỉ & Thành tích học tập</h3>
+            <h3>🏅 Chứng chỉ &amp; Thành tích học tập</h3>
             <ul class="check-list">
               <li><strong>ChainFit Supply Chain Simulation (10/2026):</strong> Hoàn thành Vòng 2 với ROI đạt 8.53%.</li>
-              <li><strong>Đồ án & Thực hành Deep Learning (2026):</strong> Hoàn thành xuất sắc bài thực nghiệm CNN (94.67%) & NLP DistilBERT (84.10%).</li>
-              <li><strong>Ngoại ngữ & Chuyên môn:</strong> Đang ôn luyện tiếng Anh giao tiếp công nghệ và chứng chỉ TOEIC theo chuẩn đầu ra.</li>
+              <li><strong>Đồ án &amp; Thực hành Deep Learning (2026):</strong> Hoàn thành xuất sắc bài thực nghiệm CNN (94.67%) &amp; NLP DistilBERT (84.10%).</li>
+              <li><strong>Ngoại ngữ &amp; Chuyên môn:</strong> Đang ôn luyện tiếng Anh giao tiếp công nghệ và chứng chỉ TOEIC theo chuẩn đầu ra.</li>
             </ul>
           </div>
 
@@ -1676,8 +539,8 @@
             <h3>🥊 Sở thích cá nhân</h3>
             <ul class="check-list">
               <li><strong>Võ thuật Muay Thái:</strong> Tập luyện bao cát định kỳ giúp rèn luyện thể lực, phản xạ và giải tỏa căng thẳng sau giờ code.</li>
-              <li><strong>Chăm sóc & Bảo dưỡng Xe máy:</strong> Tự tìm hiểu kỹ thuật máy móc, bảo dưỡng dòng xe Honda Wave Thái 110 và Yamaha Luvias.</li>
-              <li><strong>Âm nhạc & Công nghệ:</strong> Nghe nhạc EDM / Viet Deep khi làm việc và tìm hiểu cấu hình phần cứng chạy mô hình AI cục bộ.</li>
+              <li><strong>Chăm sóc &amp; Bảo dưỡng Xe máy:</strong> Tự tìm hiểu kỹ thuật máy móc, bảo dưỡng dòng xe Honda Wave Thái 110 và Yamaha Luvias.</li>
+              <li><strong>Âm nhạc &amp; Công nghệ:</strong> Nghe nhạc EDM / Viet Deep khi làm việc và tìm hiểu cấu hình phần cứng chạy mô hình AI cục bộ.</li>
             </ul>
           </div>
         </div>
@@ -1730,6 +593,7 @@
         </form>
       </section>
 
+      <!-- 9. FOOTER LIÊN KẾT CẢ 6 THÀNH VIÊN NHÓM 1 & HUB -->
       <footer class="resume-footer" style="background: var(--bg-sheet); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 22px 32px; text-align: left; box-shadow: var(--shadow-card);">
         <style>
           .thien-team-nav {
@@ -1747,13 +611,13 @@
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 18px;
+            gap: 16px;
             list-style: none;
             padding: 0;
             margin: 0;
           }
           .thien-team-links a {
-            color: var(--primary); /* Xanh Teal #0f766e đồng bộ với nút Gửi Tin Nhắn */
+            color: var(--primary);
             text-decoration: underline;
             text-underline-offset: 4px;
             font-weight: 600;
@@ -1764,7 +628,7 @@
             color: var(--primary-hover);
           }
           .thien-team-links a[aria-current="page"] {
-            background: var(--primary-light); /* Khung pill xanh bạc hà khớp với cột trái */
+            background: var(--primary-light);
             color: var(--primary);
             padding: 3px 10px;
             border-radius: 6px;
@@ -1774,11 +638,13 @@
           }
         </style>
         <nav class="thien-team-nav" aria-label="Portfolio của nhóm">
-          <h3>Portfolio của cả nhóm</h3>
+          <h3>Portfolio của cả nhóm (Nhóm 1)</h3>
           <ul class="thien-team-links">
+            <li><a href="../index.html">🏠 Trang chủ Nhóm 1</a></li>
             <li><a href="../portfolio_khiem/index.html">Phạm Gia Khiêm</a></li>
             <li><a href="../portfolio_hung/index1.html">Bùi Gia Hưng</a></li>
             <li><a href="../portfolio_khoa/index2.html">Đoàn Đăng Khoa</a></li>
+            <li><a href="../portfolio_khoi/index.html">Nguyễn Đăng Khôi</a></li>
             <li><a href="../portfolio_tan/index3.html">Nguyễn Duy Tân</a></li>
             <li><a href="../portfolio_thien/portfolio.html" aria-current="page">Đinh Thanh Thiên</a></li>
           </ul>
@@ -1814,310 +680,7 @@
   <!-- NÚT CUỘN LÊN ĐẦU TRANG -->
   <button class="scroll-top-btn" id="scrollTopBtn" type="button" title="Lên đầu trang">↑</button>
 
-  <!-- ==================== JAVASCRIPT XỬ LÝ TƯƠNG TÁC (TIÊU CHÍ 13, 14, 15, 17) ==================== -->
-  <script id="mainScript">
-    // 1. HIỆU ỨNG GÕ CHỮ ĐỘNG Ở SIDEBAR VCARD
-    const roles = [
-      "Sinh viên CNTT & Smart Logistics",
-      "Python Backend Developer (FastAPI/Flask)",
-      "Applied AI & Data Enthusiast"
-    ];
-    let roleIdx = 0;
-    const roleEl = document.getElementById("typewriterRole");
-    setInterval(() => {
-      roleIdx = (roleIdx + 1) % roles.length;
-      if (roleEl) roleEl.textContent = roles[roleIdx];
-    }, 3200);
-
-    // 2. CHUYỂN ĐỔI DARK MODE / LIGHT MODE LƯU LOCALSTORAGE
-    const themeToggle = document.getElementById("themeToggle");
-    const themeIcon = document.getElementById("themeIcon");
-    const themeText = document.getElementById("themeText");
-    const savedTheme = localStorage.getItem("thien_vcard_theme") || "light";
-
-    function applyTheme(theme) {
-      document.documentElement.setAttribute("data-theme", theme);
-      localStorage.setItem("thien_vcard_theme", theme);
-      if (theme === "dark") {
-        themeIcon.textContent = "☀️";
-        themeText.textContent = "Sáng";
-      } else {
-        themeIcon.textContent = "🌙";
-        themeText.textContent = "Tối";
-      }
-    }
-    applyTheme(savedTheme);
-
-    themeToggle.addEventListener("click", () => {
-      const current = document.documentElement.getAttribute("data-theme");
-      applyTheme(current === "dark" ? "light" : "dark");
-    });
-
-    // 3. MENU MOBILE ĐÓNG / MỞ
-    const mobileMenuBtn = document.getElementById("mobileMenuBtn");
-    const navMenu = document.getElementById("navMenu");
-    mobileMenuBtn.addEventListener("click", () => {
-      navMenu.classList.toggle("open");
-    });
-    document.querySelectorAll(".nav-link").forEach(link => {
-      link.addEventListener("click", () => navMenu.classList.remove("open"));
-    });
-
-    // 4. ĐỔI ẢNH ĐẠI DIỆN CÁ NHÂN TRỰC TIẾP (FILEREADER)
-    const avatarInput = document.getElementById("avatarInput");
-    const avatarPreview = document.getElementById("avatarPreview");
-    avatarInput.addEventListener("change", (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = (ev) => {
-        avatarPreview.src = ev.target.result;
-      };
-      reader.readAsDataURL(file);
-    });
-
-    // 5. TABS CHUYỂN ĐỔI HỌC VẤN / KINH NGHIỆM / HOẠT ĐỘNG
-    const tabBtns = document.querySelectorAll(".tab-btn");
-    const tabPanels = document.querySelectorAll(".tab-panel");
-    tabBtns.forEach(btn => {
-      btn.addEventListener("click", () => {
-        tabBtns.forEach(b => b.classList.remove("active"));
-        tabPanels.forEach(p => p.classList.remove("active"));
-        btn.classList.add("active");
-        const target = document.getElementById(btn.dataset.tab);
-        if (target) target.classList.add("active");
-      });
-    });
-
-    // 6. BỘ LỌC DỰ ÁN (PROJECT FILTER)
-    const filterBtns = document.querySelectorAll(".filter-btn");
-    const projectCards = document.querySelectorAll(".project-card");
-    filterBtns.forEach(btn => {
-      btn.addEventListener("click", () => {
-        filterBtns.forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        const filter = btn.dataset.filter;
-        projectCards.forEach(card => {
-          if (filter === "all" || card.dataset.category === filter) {
-            card.style.display = "flex";
-          } else {
-            card.style.display = "none";
-          }
-        });
-      });
-    });
-
-    // 7. CÔNG CỤ TÍNH CƯỚC LOGISTICS DIM WEIGHT TRỰC TIẾP
-    const calcDimBtn = document.getElementById("calcDimBtn");
-    const calcResultText = document.getElementById("calcResultText");
-    calcDimBtn.addEventListener("click", () => {
-      const L = parseFloat(document.getElementById("dimL").value) || 0;
-      const W = parseFloat(document.getElementById("dimW").value) || 0;
-      const H = parseFloat(document.getElementById("dimH").value) || 0;
-      const realW = parseFloat(document.getElementById("realW").value) || 0;
-      const dimW = (L * W * H) / 5000;
-      const chargeable = Math.max(dimW, realW);
-      const price = Math.round(chargeable * 11000);
-      calcResultText.textContent = `👉 Trọng lượng quy đổi (DIM): ${dimW.toFixed(2)} kg | Trọng lượng tính cước: ${chargeable.toFixed(2)} kg | Cước B2B ước tính: ${price.toLocaleString("vi-VN")} VNĐ`;
-    });
-
-    // 8. MODAL XEM CHI TIẾT DỰ ÁN KÈM SLIDESHOW
-    const projectDetails = [
-      {
-        title: "B2B Smart Logistics Freight & Routing REST API",
-        desc: "Dự án xây dựng API chuẩn công nghiệp cho bài toán tính giá cước vận chuyển hàng hóa B2B.",
-        slides: [
-          { cap: "Bước 1/3: Kiến trúc RESTful & OpenAPI", text: "Thiết kế các endpoint chuẩn hóa, trả về JSON rõ ràng và tích hợp tài liệu Swagger UI." },
-          { cap: "Bước 2/3: Thuật toán DIM Weight & Phân vùng", text: "So sánh tự động giữa cân nặng thực tế và thể tích (Dài x Rộng x Cao / 5000) theo từng vùng giao nhận." },
-          { cap: "Bước 3/3: Kiểm thử tự động (Unit Testing)", text: "Viết bộ test kiểm tra các trường hợp biên, kích thước âm hoặc mã vùng không hợp lệ." }
-        ]
-      },
-      {
-        title: "Nền tảng Web Thương mại Điện tử UTH",
-        desc: "Đồ án phát triển hệ thống Web Fullstack phục vụ đặt hàng và quản lý tồn kho.",
-        slides: [
-          { cap: "Bước 1/3: Thiết kế CSDL PostgreSQL & SQLAlchemy", text: "Chuẩn hóa bảng Sản phẩm, Người dùng, Đơn hàng và Chi tiết giao dịch." },
-          { cap: "Bước 2/3: Xử lý bất đồng bộ với RabbitMQ", text: "Đưa tác vụ xác nhận đơn hàng vào Message Queue để tránh nghẽn khi nhiều người đặt cùng lúc." },
-          { cap: "Bước 3/3: Đóng gói Docker Compose", text: "Chạy đồng bộ các container Web, Database và Queue chỉ bằng một lệnh duy nhất." }
-        ]
-      },
-      {
-        title: "Ứng dụng Web Dự báo Giá Vàng (ML Predictor)",
-        desc: "Kết hợp FastAPI, Jinja2 Templates và mô hình học máy dự đoán xu hướng giá vàng.",
-        slides: [
-          { cap: "Bước 1/3: Đồng bộ dữ liệu Yahoo Finance API", text: "Tự động lấy chuỗi dữ liệu giá lịch sử và lưu trữ vào cơ sở dữ liệu SQLite cục bộ." },
-          { cap: "Bước 2/3: Huấn luyện mô hình Hồi quy / Chuỗi thời gian", text: "Trích xuất đặc trưng đường trung bình động (MA) để dự báo biên độ dao động ngắn hạn." },
-          { cap: "Bước 3/3: Trực quan hóa trên giao diện Web", text: "Hiển thị bảng so sánh giá thực tế và giá dự báo trực quan cho người dùng." }
-        ]
-      },
-      {
-        title: "Phân loại Ảnh CNN & Cảm xúc Văn bản DistilBERT",
-        desc: "Bộ đôi dự án thực nghiệm Deep Learning trên PyTorch.",
-        slides: [
-          { cap: "Bước 1/2: Custom CNN trên tập FashionMNIST", text: "Tối ưu các lớp Conv2d, BatchNorm và Dropout giúp đạt độ chính xác 94.67% trên tập kiểm thử." },
-          { cap: "Bước 2/2: Fine-tune DistilBERT trên tập IMDb", text: "Áp dụng Transfer Learning phân loại bình luận tích cực/tiêu cực đạt độ chính xác 84.10%." }
-        ]
-      }
-    ];
-
-    const projectModal = document.getElementById("projectModal");
-    const modalTitle = document.getElementById("modalTitle");
-    const modalDesc = document.getElementById("modalDesc");
-    const modalSlideCaption = document.getElementById("modalSlideCaption");
-    const modalSlideDetail = document.getElementById("modalSlideDetail");
-    let currentProj = 0;
-    let currentSlide = 0;
-
-    function renderModalSlide() {
-      const p = projectDetails[currentProj];
-      const s = p.slides[currentSlide];
-      modalTitle.textContent = p.title;
-      modalDesc.textContent = p.desc;
-      modalSlideCaption.textContent = s.cap;
-      modalSlideDetail.textContent = s.text;
-    }
-
-    document.querySelectorAll(".project-detail-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        currentProj = parseInt(btn.dataset.project, 10);
-        currentSlide = 0;
-        renderModalSlide();
-        projectModal.classList.add("open");
-      });
-    });
-
-    document.getElementById("closeModalBtn").addEventListener("click", () => {
-      projectModal.classList.remove("open");
-    });
-    document.getElementById("prevSlideBtn").addEventListener("click", () => {
-      const total = projectDetails[currentProj].slides.length;
-      currentSlide = (currentSlide - 1 + total) % total;
-      renderModalSlide();
-    });
-    document.getElementById("nextSlideBtn").addEventListener("click", () => {
-      const total = projectDetails[currentProj].slides.length;
-      currentSlide = (currentSlide + 1) % total;
-      renderModalSlide();
-    });
-
-    // 9. KIỂM TRA DỮ LIỆU FORM LIÊN HỆ BẰNG JAVASCRIPT (TIÊU CHÍ 15)
-    const contactForm = document.getElementById("contactForm");
-    const fillDemoBtn = document.getElementById("fillDemoBtn");
-
-    fillDemoBtn.addEventListener("click", () => {
-      document.getElementById("fullName").value = "Nguyễn Minh Hoàng (HR TechLogistics)";
-      document.getElementById("emailAddr").value = "hoang.nguyen@logistics.vn";
-      document.getElementById("phoneNum").value = "0908123456";
-      document.getElementById("subjectTopic").value = "Mời phỏng vấn Thực tập sinh Python Backend";
-      document.getElementById("messageBody").value = "Chào Thiên, anh đã xem qua các dự án FastAPI và Smart Logistics API trên CV của em.";
-    });
-
-    contactForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      let isValid = true;
-
-      const nameEl = document.getElementById("fullName");
-      const emailEl = document.getElementById("emailAddr");
-      const phoneEl = document.getElementById("phoneNum");
-      const subjEl = document.getElementById("subjectTopic");
-      const msgEl = document.getElementById("messageBody");
-      const statusBox = document.getElementById("formStatus");
-
-      // Reset lỗi
-      document.querySelectorAll(".error-msg").forEach(el => el.textContent = "");
-      document.querySelectorAll(".form-control").forEach(el => el.classList.remove("invalid"));
-      statusBox.className = "form-status";
-
-      if (nameEl.value.trim().length < 2) {
-        document.getElementById("errName").textContent = "Vui lòng nhập họ tên hợp lệ (tối thiểu 2 ký tự).";
-        nameEl.classList.add("invalid");
-        isValid = false;
-      }
-
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(emailEl.value.trim())) {
-        document.getElementById("errEmail").textContent = "Email không đúng định dạng (ví dụ: ten@domain.com).";
-        emailEl.classList.add("invalid");
-        isValid = false;
-      }
-
-      const phoneRegex = /^(0[3|5|7|8|9])[0-9]{8}$/;
-      if (!phoneRegex.test(phoneEl.value.trim())) {
-        document.getElementById("errPhone").textContent = "Số điện thoại Việt Nam phải gồm 10 chữ số hợp lệ.";
-        phoneEl.classList.add("invalid");
-        isValid = false;
-      }
-
-      if (subjEl.value.trim().length < 3) {
-        document.getElementById("errSubject").textContent = "Vui lòng nhập chủ đề liên hệ.";
-        subjEl.classList.add("invalid");
-        isValid = false;
-      }
-
-      if (msgEl.value.trim().length < 15) {
-        document.getElementById("errMessage").textContent = "Nội dung tin nhắn cần tối thiểu 15 ký tự.";
-        msgEl.classList.add("invalid");
-        isValid = false;
-      }
-
-      if (isValid) {
-        statusBox.textContent = "✅ Đã kiểm tra hợp lệ và gửi tin nhắn thành công tới Đinh Thanh Thiên!";
-        statusBox.classList.add("success");
-        contactForm.reset();
-      }
-    });
-
-    // 10. SCROLL-TO-TOP & ACTIVE MENU KHI CUỘN TRANG
-    const scrollTopBtn = document.getElementById("scrollTopBtn");
-    const sections = document.querySelectorAll("section[id]");
-    const navLinks = document.querySelectorAll(".nav-link");
-
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 320) {
-        scrollTopBtn.classList.add("show");
-      } else {
-        scrollTopBtn.classList.remove("show");
-      }
-
-      let currentSec = "banner";
-      sections.forEach(sec => {
-        if (window.scrollY >= sec.offsetTop - 130) {
-          currentSec = sec.getAttribute("id");
-        }
-      });
-      navLinks.forEach(link => {
-        link.classList.toggle("active", link.getAttribute("href") === `#${currentSec}`);
-      });
-    });
-
-    scrollTopBtn.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-
-    // 11. XUẤT 3 FILE TÁCH RỜI (INDEX.HTML, CSS/STYLE.CSS, JS/MAIN.JS) ĐẠT TRỌN ĐIỂM MỤC 17
-    function downloadTextFile(filename, content) {
-      const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    }
-
-    document.getElementById("exportCodeBtn").addEventListener("click", () => {
-      const cssContent = document.getElementById("mainStylesheet").textContent.trim();
-      const jsContent = document.getElementById("mainScript").textContent.trim();
-      const cleanHtml = document.documentElement.outerHTML
-        .replace(/<style id="mainStylesheet">[\s\S]*?<\/style>/, '<link rel="stylesheet" href="css/style.css" />')
-        .replace(/<script id="mainScript">[\s\S]*?<\/script>/, '<script src="js/main.js"><\/script>');
-
-      downloadTextFile("style.css", cssContent);
-      setTimeout(() => downloadTextFile("main.js", jsContent), 250);
-      setTimeout(() => downloadTextFile("index.html", "<!DOCTYPE html>\n" + cleanHtml), 500);
-    });
-  </script>
+  <!-- Liên kết trực tiếp tới file main.js mới của Thiên -->
+  <script src="main.js" defer></script>
 </body>
 </html>

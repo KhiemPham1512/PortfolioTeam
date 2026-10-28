@@ -24,7 +24,7 @@ const TEAM_MEMBERS = [
     entry: "./portfolio_hung/index1.html",
     socials: {
       github: "https://github.com/",
-      email: "mailto:hung.buigia@example.com"
+      email: "mailto:ghung0610gh@gmail.com"
     },
     glowClass: "glow-ai",
     badgeCategory: "AI & Smart Logistics"
@@ -40,16 +40,16 @@ const TEAM_MEMBERS = [
     status: "open",
     statusText: "Open to Work",
     bio: "Sinh viên CNTT năm 3 UTH định hướng lập trình di động Android hiện đại và kiến trúc Backend tin cậy. Đam mê tương tác mượt mà, mỹ học giao diện tinh tế phong cách Nhật Bản.",
-    skills: ["Android", "Kotlin", "Java", "Backend API", "Database", "Git", "Canvas Animation", "RESTful"],
+    skills: ["Android", "Kotlin", "Jetpack Compose", "Python FastAPI", "SQL Server", "Supabase", "Git", "Canvas Animation"],
     highlights: [
-      "Smart Heritage - Ứng dụng khám phá di sản văn hóa số",
+      "Smart Heritage - Hệ thống tham quan di sản dùng iBeacon",
       "Lost & Found - Nền tảng kết nối tìm kiếm đồ thất lạc",
       "Giao diện tương tác hiệu ứng cánh hoa rơi Petals Canvas"
     ],
     entry: "./portfolio_khiem/index.html",
     socials: {
-      github: "https://github.com/",
-      email: "mailto:khiem.phamgia@example.com"
+      github: "https://github.com/KhiemPham1512",
+      email: "mailto:khiemanh94@gmail.com"
     },
     glowClass: "glow-mobile",
     badgeCategory: "Mobile & Backend"
@@ -74,7 +74,7 @@ const TEAM_MEMBERS = [
     entry: "./portfolio_khoa/index2.html",
     socials: {
       github: "https://github.com/",
-      email: "mailto:khoa.doandang@example.com"
+      email: "mailto:khoadd4552@ut.edu.vn"
     },
     glowClass: "glow-frontend",
     badgeCategory: "Frontend & Web"
@@ -125,7 +125,7 @@ const TEAM_MEMBERS = [
     entry: "./portfolio_tan/index3.html",
     socials: {
       github: "https://github.com/",
-      email: "mailto:tan.nguyenduy@example.com"
+      email: "mailto:duytan13012006@gmail.com"
     },
     glowClass: "glow-frontend",
     badgeCategory: "Frontend & Data"
@@ -133,27 +133,27 @@ const TEAM_MEMBERS = [
   {
     id: "dinh-thanh-thien",
     name: "Đinh Thanh Thiên",
-    role: "UI/UX Designer & Web Developer",
-    category: "ui-ux",
-    secondaryCategories: ["frontend"],
+    role: "Python Backend & Smart Logistics Developer",
+    category: "backend",
+    secondaryCategories: ["ai-data", "ui-ux"],
     university: "Đại học Giao thông Vận tải TP.HCM (UTH)",
-    avatar: "hub_assets/thien_avatar.jpg",
+    avatar: "./portfolio_thien/ảnh thiên.jpg",
     status: "open",
     statusText: "Open to Work",
-    bio: "Chuyên gia thiết kế giao diện UI/UX và phát triển web theo chuẩn quốc tế Tuts+. Tinh tế trong cấu trúc Typography, bố cục Resume & vCard phân cấp tỉ mỉ và chuẩn Accessibility A11y.",
-    skills: ["UI/UX Design", "Figma", "Web Development", "CSS3 / SCSS", "Typography", "Accessibility (A11y)", "Design Systems"],
+    bio: "Sinh viên ngành CNTT & Smart Logistics tại UTH. Tập trung phát triển hệ thống Backend Python (FastAPI / Flask), cơ sở dữ liệu SQL và ứng dụng Machine Learning vào bài toán tối ưu cước phí, định tuyến giao nhận thực tế.",
+    skills: ["Python", "FastAPI", "Flask", "PostgreSQL", "RabbitMQ", "PyTorch", "Docker", "Smart Logistics"],
     highlights: [
-      "Bộ sưu tập Resume & vCard Portfolio chuẩn thiết kế quốc tế",
-      "Hệ thống phân cấp Typography chuẩn mực cho hồ sơ năng lực",
-      "Tối ưu hóa khả năng tiếp cận (A11y) và trải nghiệm duyệt web"
+      "B2B Smart Logistics Freight & Routing REST API (DIM Weight)",
+      "Nền tảng Web Thương mại Điện tử UTH (FastAPI + RabbitMQ)",
+      "Phân loại Ảnh CNN (94.67%) & Dự báo Giá Vàng ML Predictor"
     ],
-    entry: "./portfolio_thien/index.html",
+    entry: "./portfolio_thien/portfolio.html",
     socials: {
-      github: "https://github.com/",
-      email: "mailto:thien.dinhthanh@example.com"
+      github: "https://github.com/dinhthanhthien10-bit",
+      email: "mailto:dinhthanhthien@uth.edu.vn"
     },
     glowClass: "glow-uiux",
-    badgeCategory: "UI/UX & Design"
+    badgeCategory: "Backend & Logistics"
   }
 ];
 
